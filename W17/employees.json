@@ -1,0 +1,6 @@
+[
+    { "id": 1, "name": "Rahul Sharma", "dept": "Engineering", "email": "rahul@work.com", "city": "Mumbai" },
+    { "id": 2, "name": "Anita Gupta", "dept": "Human Resources", "email": "anita@work.com", "city": "Delhi" },
+    { "id": 3, "name": "Sanya Singh", "dept": "Marketing", "email": "sanya@work.com", "city": "Bangalore" },
+    { "id": 4, "name": "Amit Patel", "dept": "Finance", "email": "amit@work.com", "city": "Ahmedabad" }
+]
