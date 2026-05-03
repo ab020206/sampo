@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W2 | Alex Dev - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">MyPortfolio</div>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">My Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="about">
+        <div class="header-content">
+            <img src="profile.png" alt="Profile" class="profile-img">
+            <h1>John Doe</h1>
+            <p>Web Developer & Designer</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">HTML & CSS</div>
+            <div class="skill-card">JavaScript</div>
+            <div class="skill-card">C++ Programming</div>
+            <div class="skill-card">Python</div>
+            <div class="skill-card">MySQL Database</div>
+            <div class="skill-card">PHP</div>
+        </div>
+    </section>
+
+    <section id="projects" class="container bg-light">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Tic Tac Toe Game</h3>
+                <p>A simple game made using HTML, CSS and JS.</p>
+                <small>Web Dev</small>
+            </div>
+            <div class="project-card">
+                <h3>Student Info System</h3>
+                <p>A desktop application to manage student data.</p>
+                <small>Python</small>
+            </div>
+            <div class="project-card">
+                <h3>Weather App</h3>
+                <p>Shows current weather using an API.</p>
+                <small>JavaScript</small>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+            <h3>Bachelor of Engineering</h3>
+            <p>ABC Institute of Technology | 2022 - 2026</p>
+        </div>
+        <div class="edu-item">
+            <h3>Higher Secondary School</h3>
+            <p>City Public School | 2020 - 2022</p>
+        </div>
+    </section>
+
+    <section id="contact" class="container bg-dark text-white">
+        <h2 class="section-title text-white">Get In Touch</h2>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!')">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Alex Dev. Built with Love.</p>
+    </footer>
+</body>
+</html>

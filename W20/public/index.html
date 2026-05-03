@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W20 | Employee CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+    <div class="container bg-white p-4 shadow rounded">
+        <h2 class="fw-bold mb-4">🏢 Employee Management</h2>
+        
+        <div class="row">
+            <div class="col-md-4 border-end">
+                <h5 id="formTitle">Add Employee</h5>
+                <input id="empId" type="hidden">
+                <input id="name" class="form-control mb-2" placeholder="Full Name">
+                <input id="pos" class="form-control mb-2" placeholder="Position">
+                <input id="sal" type="number" class="form-control mb-2" placeholder="Salary">
+                <input id="email" class="form-control mb-3" placeholder="Email">
+                <button id="saveBtn" class="btn btn-primary w-100" onclick="saveEmployee()">Save Record</button>
+                <button id="cancelBtn" class="btn btn-link w-100 mt-2" style="display:none" onclick="resetForm()">Cancel</button>
+            </div>
+            
+            <div class="col-md-8">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr><th>Name</th><th>Position</th><th>Salary</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="empTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadEmployees() {
+            const res = await fetch('/employees');
+            const data = await res.json();
+            document.getElementById('empTable').innerHTML = data.map(e => `
+                <tr>
+                    <td>${e.name}</td>
+                    <td>${e.position}</td>
+                    <td>$${e.salary}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info text-white" onclick="editEmp('${e._id}', '${e.name}', '${e.position}', ${e.salary}, '${e.email}')">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteEmp('${e._id}')">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function saveEmployee() {
+            const id = document.getElementById('empId').value;
+            const data = {
+                name: document.getElementById('name').value,
+                position: document.getElementById('pos').value,
+                salary: document.getElementById('sal').value,
+                email: document.getElementById('email').value
+            };
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? '/employees/' + id : '/employees';
+
+            await fetch(url, {
+                method: method,
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            resetForm();
+            loadEmployees();
+        }
+
+        async function deleteEmp(id) {
+            if(confirm("Delete this record?")) {
+                await fetch('/employees/' + id, { method: 'DELETE' });
+                loadEmployees();
+            }
+        }
+
+        function editEmp(id, name, pos, sal, email) {
+            document.getElementById('empId').value = id;
+            document.getElementById('name').value = name;
+            document.getElementById('pos').value = pos;
+            document.getElementById('sal').value = sal;
+            document.getElementById('email').value = email;
+            
+            document.getElementById('formTitle').innerText = "Edit Employee";
+            document.getElementById('saveBtn').innerText = "Update Record";
+            document.getElementById('cancelBtn').style.display = "block";
+        }
+
+        function resetForm() {
+            document.getElementById('empId').value = "";
+            document.querySelectorAll('input').forEach(i => i.value = "");
+            document.getElementById('formTitle').innerText = "Add Employee";
+            document.getElementById('saveBtn').innerText = "Save Record";
+            document.getElementById('cancelBtn').style.display = "none";
+        }
+
+        loadEmployees();
+    </script>
+</body>
+</html>

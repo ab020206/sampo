@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>W23 | Student Clubs</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="clubsHome">
+    <div data-role="header" data-theme="a">
+        <h1>College Clubs</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#acm">ACM Student Chapter</a></li>
+            <li><a href="#ieee">IEEE Student Branch</a></li>
+            <li><a href="#arts">Fine Arts Club</a></li>
+            <li><a href="#sports">Sports Club</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ACM Club Page -->
+<div data-role="page" id="acm">
+    <div data-role="header">
+        <a href="#clubsHome" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+        <h1>ACM Club</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h3>Description</h3>
+        <p>ACM is the world's largest educational and scientific computing society.</p>
+        <h3>Achievements</h3>
+        <ul>
+            <li>Won National Coding Competition 2024</li>
+            <li>Organized successful Hackathon with 500+ participants</li>
+        </ul>
+        <img src="https://via.placeholder.com/300x150?text=ACM+Event" style="width:100%; border-radius:10px;">
+    </div>
+</div>
+
+<!-- IEEE Club Page -->
+<div data-role="page" id="ieee">
+    <div data-role="header">
+        <a href="#clubsHome" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+        <h1>IEEE Club</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h3>Description</h3>
+        <p>IEEE is dedicated to advancing technology for the benefit of humanity.</p>
+        <h3>Achievements</h3>
+        <ul>
+            <li>Published 5 Research Papers in 2023</li>
+            <li>Best Student Branch Award 2022</li>
+        </ul>
+        <img src="https://via.placeholder.com/300x150?text=IEEE+Workshop" style="width:100%; border-radius:10px;">
+    </div>
+</div>
+
+</body>
+</html>

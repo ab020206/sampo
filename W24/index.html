@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>W24 | Movie Reviews</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .movie-img { width: 100%; max-width: 250px; display: block; margin: 10px auto; border-radius: 8px; }
+        .review-text { font-style: italic; color: #555; }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-theme="b">
+        <h1>Movie Central</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h3>Featured Reviews</h3>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#movie1">The Great Adventure</a></li>
+            <li><a href="#movie2">Space Travels</a></li>
+            <li><a href="#movie3">Code Master</a></li>
+        </ul>
+        <img src="movies.png" style="width:100%; opacity:0.8;">
+    </div>
+</div>
+
+<!-- Movie 1 -->
+<div data-role="page" id="movie1">
+    <div data-role="header">
+        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+        <h1>Review</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h2>The Great Adventure</h2>
+        <p><strong>Genre:</strong> Action / Thriller</p>
+        <img src="https://via.placeholder.com/200x300?text=Poster+1" class="movie-img">
+        <h3>Summary</h3>
+        <p>A group of explorers travel deep into the jungle to find a lost treasure.</p>
+        <h3>Review</h3>
+        <p class="review-text">"An amazing journey with stunning visuals and great acting. A must-watch for adventure fans!"</p>
+        <p>Rating: ⭐⭐⭐⭐⭐</p>
+    </div>
+</div>
+
+<!-- Movie 2 -->
+<div data-role="page" id="movie2">
+    <div data-role="header">
+        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
+        <h1>Review</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h2>Space Travels</h2>
+        <p><strong>Genre:</strong> Sci-Fi</p>
+        <img src="https://via.placeholder.com/200x300?text=Poster+2" class="movie-img">
+        <h3>Summary</h3>
+        <p>A mission to Mars goes wrong when a mysterious signal is detected from a distant galaxy.</p>
+        <h3>Review</h3>
+        <p class="review-text">"Thought-provoking and intense. The special effects are top-notch."</p>
+        <p>Rating: ⭐⭐⭐⭐</p>
+    </div>
+</div>
+
+</body>
+</html>

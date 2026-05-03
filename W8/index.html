@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W8 | Event Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; }
+        .form-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+        .btn-register {
+            padding: 12px;
+            font-weight: 700;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4 fw-bold text-primary">Event Registration</h2>
+        <p class="text-center text-muted mb-5">Please fill in your details to reserve a spot.</p>
+
+        <form class="needs-validation" novalidate id="registrationForm">
+            <!-- Full Name with Floating Label -->
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="floatName" placeholder="Full Name" required>
+                <label for="floatName">Full Name</label>
+                <div class="invalid-feedback">Please enter your full name.</div>
+            </div>
+
+            <!-- Email with Floating Label and Tooltip -->
+            <div class="form-floating mb-4">
+                <input type="email" class="form-control" id="floatEmail" placeholder="name@example.com" 
+                       required data-bs-toggle="tooltip" data-bs-placement="top" title="We'll never share your email.">
+                <label for="floatEmail">Email Address</label>
+                <div class="invalid-feedback">Please provide a valid email address.</div>
+            </div>
+
+            <!-- Event Selection -->
+            <div class="form-floating mb-4">
+                <select class="form-select" id="floatEvent" required>
+                    <option value="" selected disabled>Choose an event...</option>
+                    <option value="1">Technology Summit 2026</option>
+                    <option value="2">Cultural Dance Night</option>
+                    <option value="3">Sports Championship</option>
+                    <option value="4">Science Exhibition</option>
+                </select>
+                <label for="floatEvent">Select Event</label>
+                <div class="invalid-feedback">Please select an event.</div>
+            </div>
+
+            <!-- Ticket Quantity -->
+            <div class="mb-4">
+                <label class="form-label text-muted small fw-bold">Ticket Quantity</label>
+                <input type="number" class="form-control form-control-lg" min="1" max="5" value="1" required>
+                <div class="invalid-feedback">Max 5 tickets per person.</div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label text-muted" for="invalidCheck">
+                    I agree to the terms and conditions.
+                </label>
+                <div class="invalid-feedback">You must agree before submitting.</div>
+            </div>
+
+            <button class="btn btn-primary btn-register w-100" type="submit">Complete Registration</button>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Enable Bootstrap Validation
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                } else {
+                    event.preventDefault()
+                    alert('Registration Successful! Check your email for details.')
+                    form.reset()
+                    form.classList.remove('was-validated')
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+    // Initialize Tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+</body>
+</html>

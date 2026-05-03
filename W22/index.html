@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>W22 | PICT Mobile</title>
+    <!-- jQuery Mobile CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <!-- jQuery & jQuery Mobile JS -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<!-- Home Page -->
+<div data-role="page" id="home">
+    <div data-role="header" data-theme="b">
+        <h1>PICT Pune</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h3>Welcome to PICT</h3>
+            <p>Pune Institute of Computer Technology</p>
+        </div>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#about" data-transition="slide">About College</a></li>
+            <li><a href="#courses" data-transition="slide">Courses Offered</a></li>
+            <li><a href="#depts" data-transition="slide">Departments</a></li>
+            <li><a href="#contact" data-transition="slide">Contact Us</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="b">
+        <h4>&copy; 2026 PICT Mobile</h4>
+    </div>
+</div>
+
+<!-- About Page -->
+<div data-role="page" id="about">
+    <div data-role="header" data-theme="b">
+        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>About</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h2>History</h2>
+        <p>Established in 1983, PICT is a pioneer in Computer Engineering education in India. It is known for its academic excellence and placements.</p>
+    </div>
+</div>
+
+<!-- Courses Page -->
+<div data-role="page" id="courses">
+    <div data-role="header" data-theme="b">
+        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Courses</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-divider-theme="a" data-inset="true">
+            <li data-role="list-divider">Undergraduate (B.E.)</li>
+            <li>Computer Engineering</li>
+            <li>Information Technology</li>
+            <li>Electronics & Telecommunication</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Departments Page -->
+<div data-role="page" id="depts">
+    <div data-role="header" data-theme="b">
+        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Departments</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div data-role="collapsible" data-collapsed="false">
+            <h4>Computer Dept</h4>
+            <p>Intake: 240 seats. Highly skilled faculty and labs.</p>
+        </div>
+        <div data-role="collapsible">
+            <h4>IT Dept</h4>
+            <p>Intake: 180 seats. Focus on latest web technologies.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Page -->
+<div data-role="page" id="contact">
+    <div data-role="header" data-theme="b">
+        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Contact</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <h3>Address</h3>
+        <p>Survey No. 27, Near Trimurti Chowk,<br>Dhankawadi, Pune - 411043</p>
+        <a href="tel:+912024371101" class="ui-btn ui-icon-phone ui-btn-icon-left ui-corner-all">Call Office</a>
+    </div>
+</div>
+
+</body>
+</html>
