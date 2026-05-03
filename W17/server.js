@@ -1,3 +1,6 @@
+/* 
+W17 Build an Employee Directory using Node.js and JSON with frontend display. 
+*/
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
