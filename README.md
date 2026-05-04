@@ -24,7 +24,7 @@ Each folder (`W1` through `W26`) represents a specific practical assignment.
 | W8 | Library Book Search | HTML/CSS/JS |
 | W9 | Weather App with JSON Data | AJAX/JSON |
 | W10 | To-Do List Application | Node/Express/JSON |
-| W11 | Student Club Auth (Register/Login) | Node/Express/MongoDB |
+| W11 | Student Club Auth (LocalStorage) | HTML/CSS/JS |
 | W12 | College Department Info Portal | HTML/CSS/JS |
 | W13 | Student Feedback Form | HTML/CSS/JS |
 | W14 | User Records API | Node/Express/JSON |

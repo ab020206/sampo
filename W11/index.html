@@ -51,9 +51,9 @@ Add proper validations for each form element.
                 <h2 class="text-center mb-4">Login</h2>
                 <form id="loginForm" novalidate>
                     <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="loginEmail" required>
-                        <div class="invalid-feedback">Please enter a valid email.</div>
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" id="loginUser" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Password</label>
@@ -72,6 +72,10 @@ Add proper validations for each form element.
                 <h2 class="text-center mb-4">Register</h2>
                 <form id="regForm" novalidate>
                     <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" id="regUser" required minlength="4">
+                        </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Full Name</label>
                             <input type="text" class="form-control" id="regName" required minlength="3">
@@ -112,8 +116,6 @@ Add proper validations for each form element.
     </div>
 
     <script>
-        const API_URL = '/api/auth';
-
         function showReg() {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('regSection').style.display = 'block';
@@ -124,8 +126,8 @@ Add proper validations for each form element.
             document.getElementById('regSection').style.display = 'none';
         }
 
-        // Registration AJAX POST
-        document.getElementById('regForm').addEventListener('submit', async function (e) {
+        // Registration Logic (Simulating AJAX POST to Local Storage)
+        document.getElementById('regForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const form = this;
             if (!form.checkValidity()) {
@@ -134,7 +136,8 @@ Add proper validations for each form element.
                 return;
             }
 
-            const data = {
+            const newUser = {
+                username: document.getElementById('regUser').value,
                 name: document.getElementById('regName').value,
                 email: document.getElementById('regEmail').value,
                 mobile: document.getElementById('regMobile').value,
@@ -144,27 +147,26 @@ Add proper validations for each form element.
                 password: document.getElementById('regPass').value
             };
 
-            try {
-                const res = await fetch(`${API_URL}/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+            // Get existing users or empty array
+            let users = JSON.parse(localStorage.getItem('users')) || [];
 
-                if (res.ok) {
-                    alert('Registration Successful!');
-                    window.location.href = 'users.html';
-                } else {
-                    const errData = await res.json();
-                    alert(`Error: ${errData.error || 'Registration failed'}`);
-                }
-            } catch (err) {
-                alert('Connection Error: Is the server running?');
+            // Check if username exists
+            if (users.find(u => u.username === newUser.username)) {
+                alert('Username already taken!');
+                return;
             }
+
+            // Push to array
+            users.push(newUser);
+            // Save to Local Storage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registration Successful!');
+            window.location.href = 'users.html';
         });
 
-        // Login AJAX POST
-        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        // Login Logic
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const form = this;
             if (!form.checkValidity()) {
@@ -173,24 +175,17 @@ Add proper validations for each form element.
                 return;
             }
 
-            const email = document.getElementById('loginEmail').value;
+            const username = document.getElementById('loginUser').value;
             const password = document.getElementById('loginPass').value;
 
-            try {
-                const res = await fetch(`${API_URL}/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username && u.password === password);
 
-                if (res.ok) {
-                    alert('Login Successful!');
-                    window.location.href = 'users.html';
-                } else {
-                    alert('Invalid credentials!');
-                }
-            } catch (err) {
-                alert('Connection Error: Is the server running?');
+            if (user) {
+                alert('Login Successful!');
+                window.location.href = 'users.html';
+            } else {
+                alert('Invalid credentials!');
             }
         });
     </script>

@@ -37,6 +37,7 @@ W11 Users Data List Page
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
+                            <th>Username</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Mobile</th>
@@ -56,19 +57,12 @@ W11 Users Data List Page
     </div>
 
     <script>
-        const API_URL = '/api/auth/users';
-
-        async function fetchUsers() {
+        function fetchUsers() {
             try {
-                const res = await fetch(API_URL);
-                if (res.ok) {
-                    const users = await res.json();
-                    renderUsers(users);
-                } else {
-                    alert("Failed to load users from server.");
-                }
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                renderUsers(users);
             } catch (err) {
-                alert("Connection Error: Is the server running?");
+                alert("Failed to load users from Local Storage.");
             }
         }
 
@@ -78,12 +72,14 @@ W11 Users Data List Page
 
             if (!users || users.length === 0) {
                 empty.style.display = 'block';
+                body.innerHTML = '';
                 return;
             }
 
             empty.style.display = 'none';
             body.innerHTML = users.map(u => `
                 <tr>
+                    <td>${u.username}</td>
                     <td class="fw-bold">${u.name}</td>
                     <td>${u.email}</td>
                     <td>${u.mobile}</td>
