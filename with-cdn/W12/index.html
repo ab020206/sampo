@@ -69,24 +69,18 @@ Use Angular’s two-way data binding to update tasks dynamically.
                 <div class="task-item" ng-repeat="task in tasks">
                     <div class="d-flex align-items-center flex-grow-1">
                         <input type="checkbox" class="me-2" ng-model="task.completed">
-                        
+
                         <!-- Dynamic Update with Two-Way Binding -->
-                        <span ng-hide="task.editing" 
-                              ng-class="{'completed': task.completed}" 
-                              class="flex-grow-1"
-                              style="cursor: pointer;"
-                              ng-click="editTask(task)">{{task.text}}</span>
-                        
-                        <input type="text" 
-                               class="edit-input flex-grow-1" 
-                               ng-show="task.editing" 
-                               ng-model="task.text" 
-                               ng-blur="saveTask(task)"
-                               ng-keyup="$event.keyCode == 13 && saveTask(task)">
+                        <span ng-hide="task.editing" ng-class="{'completed': task.completed}" class="flex-grow-1"
+                            style="cursor: pointer;" ng-click="editTask(task)">{{task.text}}</span>
+
+                        <input type="text" class="edit-input flex-grow-1" ng-show="task.editing" ng-model="task.text"
+                            ng-blur="saveTask(task)" ng-keyup="$event.keyCode == 13 && saveTask(task)">
                     </div>
 
                     <div class="ms-2">
-                        <button class="btn btn-sm btn-link text-danger text-decoration-none" ng-click="deleteTask($index)">
+                        <button class="btn btn-sm btn-link text-danger text-decoration-none"
+                            ng-click="deleteTask($index)">
                             Delete
                         </button>
                     </div>
@@ -107,7 +101,12 @@ Use Angular’s two-way data binding to update tasks dynamically.
             // Initial Data
             $scope.tasks = [
                 { text: 'Learn AngularJS', completed: false, editing: false },
-                { text: 'Complete WAD Practical', completed: true, editing: false }
+                { text: 'Complete WAD Practical', completed: true, editing: false },
+                { text: 'Watch a movie', completed: false, editing: false },
+                { text: 'Go for a walk', completed: false, editing: false },
+                { text: 'Read a book', completed: false, editing: false },
+                { text: 'Call a friend', completed: false, editing: false },
+
             ];
 
             // Add Task
