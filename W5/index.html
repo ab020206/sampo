@@ -5,6 +5,7 @@ The page should be fully responsive for different screen sizes.
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,21 @@ The page should be fully responsive for different screen sizes.
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; }
-        .product-card img { height: 200px; object-fit: cover; }
-        .filter-section { margin-bottom: 30px; }
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .product-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
@@ -28,7 +39,8 @@ The page should be fully responsive for different screen sizes.
         <div class="d-flex justify-content-between align-items-center filter-section">
             <h2>Our Products</h2>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Filter by Category
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="filterDropdown">
@@ -44,24 +56,24 @@ The page should be fully responsive for different screen sizes.
             <!-- Electronics -->
             <div class="col product-item electronics">
                 <div class="card h-100 product-card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200?text=Smartphone" class="card-img-top" alt="Product">
+                    <img src="items.png" class="card-img-top" alt="Product">
                     <div class="card-body">
                         <h5 class="card-title">Smartphone X</h5>
                         <p class="card-text">Latest model with high-resolution camera and long battery life.</p>
-                        <h6 class="text-primary">$599.00</h6>
+                        <h6 class="text-primary">₹599.00</h6>
                         <button class="btn btn-outline-dark btn-sm mt-2">Add to Cart</button>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Fashion -->
             <div class="col product-item fashion">
                 <div class="card h-100 product-card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200?text=T-Shirt" class="card-img-top" alt="Product">
+                    <img src="items.png" class="card-img-top" alt="Product">
                     <div class="card-body">
                         <h5 class="card-title">Cotton T-Shirt</h5>
                         <p class="card-text">Comfortable 100% cotton t-shirt available in multiple colors.</p>
-                        <h6 class="text-primary">$25.00</h6>
+                        <h6 class="text-primary">₹25.00</h6>
                         <button class="btn btn-outline-dark btn-sm mt-2">Add to Cart</button>
                     </div>
                 </div>
@@ -70,11 +82,11 @@ The page should be fully responsive for different screen sizes.
             <!-- Home -->
             <div class="col product-item home">
                 <div class="card h-100 product-card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200?text=Blender" class="card-img-top" alt="Product">
+                    <img src="items.png" class="card-img-top" alt="Product">
                     <div class="card-body">
                         <h5 class="card-title">Kitchen Blender</h5>
                         <p class="card-text">Powerful motor for making smoothies and soups effortlessly.</p>
-                        <h6 class="text-primary">$79.99</h6>
+                        <h6 class="text-primary">₹79.99</h6>
                         <button class="btn btn-outline-dark btn-sm mt-2">Add to Cart</button>
                     </div>
                 </div>
@@ -83,11 +95,11 @@ The page should be fully responsive for different screen sizes.
             <!-- Electronics -->
             <div class="col product-item electronics">
                 <div class="card h-100 product-card shadow-sm">
-                    <img src="https://via.placeholder.com/300x200?text=Headphones" class="card-img-top" alt="Product">
+                    <img src="items.png" class="card-img-top" alt="Product">
                     <div class="card-body">
                         <h5 class="card-title">Wireless Headphones</h5>
                         <p class="card-text">Noise-canceling headphones with premium sound quality.</p>
-                        <h6 class="text-primary">$199.00</h6>
+                        <h6 class="text-primary">₹199.00</h6>
                         <button class="btn btn-outline-dark btn-sm mt-2">Add to Cart</button>
                     </div>
                 </div>
@@ -117,4 +129,5 @@ The page should be fully responsive for different screen sizes.
         }
     </script>
 </body>
+
 </html>

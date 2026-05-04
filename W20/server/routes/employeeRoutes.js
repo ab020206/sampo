@@ -1,45 +1,47 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 
-const DATA_PATH = path.join(__dirname, '../data/employees.json');
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/employeeDB')
+    .then(() => console.log('Connected to employeeDB'))
+    .catch(err => console.error(err));
 
-const readData = () => JSON.parse(fs.readFileSync(DATA_PATH));
-const writeData = (data) => fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+const employeeSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    position: String,
+    salary: Number
+});
+
+const Employee = mongoose.model('Employee', employeeSchema);
 
 // GET all
-router.get('/', (req, res) => {
-    res.json(readData());
+router.get('/', async (req, res) => {
+    const employees = await Employee.find();
+    res.json(employees);
 });
 
 // POST add
-router.post('/', (req, res) => {
-    const employees = readData();
-    const newEmployee = { id: Date.now(), ...req.body };
-    employees.push(newEmployee);
-    writeData(employees);
+router.post('/', async (req, res) => {
+    const newEmployee = new Employee(req.body);
+    await newEmployee.save();
     res.status(201).json(newEmployee);
 });
 
 // PUT update
-router.put('/:id', (req, res) => {
-    const employees = readData();
-    const index = employees.findIndex(e => e.id == req.params.id);
-    if (index !== -1) {
-        employees[index] = { ...employees[index], ...req.body };
-        writeData(employees);
-        res.json(employees[index]);
+router.put('/:id', async (req, res) => {
+    const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (employee) {
+        res.json(employee);
     } else {
         res.status(404).json({ error: 'Employee not found' });
     }
 });
 
 // DELETE
-router.delete('/:id', (req, res) => {
-    const employees = readData();
-    const filtered = employees.filter(e => e.id != req.params.id);
-    writeData(filtered);
+router.delete('/:id', async (req, res) => {
+    await Employee.findByIdAndDelete(req.params.id);
     res.json({ message: 'Deleted' });
 });
 

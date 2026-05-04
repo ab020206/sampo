@@ -6,69 +6,86 @@ W4 Develop a webpage for an online course listing using HTML and CSS, showcasing
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Listing | W4</title>
+    <title>Courses | EduStream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Online Learning Platform</h1>
-            <p>Expand your knowledge with our expert-led courses</p>
-        </header>
+    <header class="header">
+        <div class="nav-container">
+            <span class="logo">EduStream</span>
+            <nav class="nav">
+                <a href="#">Browse</a>
+                <a href="#">About</a>
+            </nav>
+        </div>
+    </header>
 
-        <div class="course-grid">
-            <div class="course-card">
-                <div class="course-info">
-                    <h3>Web Development Bootcamp</h3>
-                    <p class="instructor">Instructor: Alex Smith</p>
-                    <p class="details">Learn HTML, CSS, and JS from scratch. Master the fundamentals of web design.</p>
-                    <div class="footer">
-                        <span class="duration">12 Weeks</span>
-                        <span class="price">$49.99</span>
-                    </div>
+    <main class="container">
+        <div class="intro">
+            <h1>Expert-led courses.</h1>
+            <p>Select a course to begin your learning journey.</p>
+        </div>
+
+        <div class="course-list">
+            <div class="course-item">
+                <div class="item-meta">
+                    <span class="instructor">Prof. Rajesh Kumar</span>
+                    <span class="duration">12 Weeks</span>
+                </div>
+                <h3>Full-Stack MERN Mastery</h3>
+                <p class="description">Build production-grade applications using MongoDB, Express, React, and Node.js.</p>
+                <div class="item-footer">
+                    <span class="price">₹4,999</span>
+                    <a href="#" class="link">Enroll</a>
                 </div>
             </div>
 
-            <div class="course-card">
-                <div class="course-info">
-                    <h3>Data Science with Python</h3>
-                    <p class="instructor">Instructor: Dr. Sarah Jane</p>
-                    <p class="details">Analyze data, build models, and visualize results using Python and Pandas.</p>
-                    <div class="footer">
-                        <span class="duration">8 Weeks</span>
-                        <span class="price">$59.99</span>
-                    </div>
+            <div class="course-item">
+                <div class="item-meta">
+                    <span class="instructor">Dr. Anjali Sharma</span>
+                    <span class="duration">16 Weeks</span>
+                </div>
+                <h3>Data Science & AI Core</h3>
+                <p class="description">Master machine learning algorithms and predictive modeling using Python.</p>
+                <div class="item-footer">
+                    <span class="price">₹6,499</span>
+                    <a href="#" class="link">Enroll</a>
                 </div>
             </div>
 
-            <div class="course-card">
-                <div class="course-info">
-                    <h3>UI/UX Design Masterclass</h3>
-                    <p class="instructor">Instructor: Michael Ross</p>
-                    <p class="details">Create stunning user interfaces and great user experiences with Figma.</p>
-                    <div class="footer">
-                        <span class="duration">6 Weeks</span>
-                        <span class="price">$39.99</span>
-                    </div>
+            <div class="course-item">
+                <div class="item-meta">
+                    <span class="instructor">Er. Vikram Singh</span>
+                    <span class="duration">8 Weeks</span>
+                </div>
+                <h3>UI/UX Product Design</h3>
+                <p class="description">Design high-fidelity prototypes and master user research using Figma.</p>
+                <div class="item-footer">
+                    <span class="price">₹3,299</span>
+                    <a href="#" class="link">Enroll</a>
                 </div>
             </div>
 
-            <div class="course-card">
-                <div class="course-info">
-                    <h3>Digital Marketing 101</h3>
-                    <p class="instructor">Instructor: Emily White</p>
-                    <p class="details">Learn SEO, SEM, and social media marketing to grow your business online.</p>
-                    <div class="footer">
-                        <span class="duration">4 Weeks</span>
-                        <span class="price">$29.99</span>
-                    </div>
+            <div class="course-item">
+                <div class="item-meta">
+                    <span class="instructor">Siddharth Mehra</span>
+                    <span class="duration">10 Weeks</span>
+                </div>
+                <h3>Cloud Architecture</h3>
+                <p class="description">Scale infrastructure and learn cloud computing best practices on AWS.</p>
+                <div class="item-footer">
+                    <span class="price">₹5,499</span>
+                    <a href="#" class="link">Enroll</a>
                 </div>
             </div>
         </div>
+    </main>
 
-        <footer>
-            <p>&copy; 2026 EduOnline. Start learning today!</p>
-        </footer>
-    </div>
+    <footer class="footer">
+        <p>&copy; 2026 EduStream. Built for clarity.</p>
+    </footer>
 </body>
 </html>

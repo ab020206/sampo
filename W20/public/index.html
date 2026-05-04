@@ -4,23 +4,76 @@ Add employee, View all employees, Update employee, Delete employee.
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>W20 | Employee CRUD</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #eee; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-        .form-group { margin-bottom: 10px; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { padding: 10px; cursor: pointer; margin-top: 10px; }
-        .add-btn { background: #28a745; color: white; border: none; width: 100%; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        .edit-btn { background: #ffc107; border: none; margin-right: 5px; }
-        .del-btn { background: #dc3545; color: white; border: none; }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #eee;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .edit-btn {
+            background: #ffc107;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .del-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Employee Management</h2>
@@ -56,7 +109,7 @@ Add employee, View all employees, Update employee, Delete employee.
                 body.innerHTML += `<tr>
                     <td>${e.name}</td>
                     <td>${e.position}</td>
-                    <td>$${e.salary}</td>
+                    <td>₹${e.salary}</td>
                     <td>
                         <button class="edit-btn" onclick="editEmp('${e._id}', '${e.name}', '${e.email}', '${e.position}', ${e.salary})">Edit</button>
                         <button class="del-btn" onclick="deleteEmp('${e._id}')">Del</button>
@@ -113,4 +166,5 @@ Add employee, View all employees, Update employee, Delete employee.
         loadEmployees();
     </script>
 </body>
+
 </html>

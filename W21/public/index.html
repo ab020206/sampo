@@ -56,7 +56,7 @@ Add book, Retrieve books, Update book, Delete book.
                 body.innerHTML += `<tr>
                     <td>${b.title}</td>
                     <td>${b.author}</td>
-                    <td>$${b.price}</td>
+                    <td>₹${b.price}</td>
                     <td>
                         <button class="edit-btn" onclick="editBook('${b._id}', '${b.title}', '${b.author}', ${b.price}, '${b.category}')">Edit</button>
                         <button class="del-btn" onclick="deleteBook('${b._id}')">Del</button>

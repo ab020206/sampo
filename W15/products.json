@@ -1,6 +1,6 @@
 [
-    { "name": "Classic Watch", "price": "$120", "image": "https://via.placeholder.com/150?text=Watch" },
-    { "name": "Wireless Earbuds", "price": "$80", "image": "https://via.placeholder.com/150?text=Earbuds" },
-    { "name": "Leather Wallet", "price": "$45", "image": "https://via.placeholder.com/150?text=Wallet" },
-    { "name": "Backpack", "price": "$60", "image": "https://via.placeholder.com/150?text=Backpack" }
+    { "name": "Classic Watch", "price": "₹9,999", "image": "https://via.placeholder.com/150?text=Watch" },
+    { "name": "Wireless Earbuds", "price": "₹2,499", "image": "https://via.placeholder.com/150?text=Earbuds" },
+    { "name": "Leather Wallet", "price": "₹1,299", "image": "https://via.placeholder.com/150?text=Wallet" },
+    { "name": "Backpack", "price": "₹1,999", "image": "https://via.placeholder.com/150?text=Backpack" }
 ]

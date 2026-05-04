@@ -1,6 +1,6 @@
 [
-    { "id": 1, "name": "Alice Johnson", "email": "alice@example.com", "city": "New York" },
-    { "id": 2, "name": "Bob Smith", "email": "bob@example.com", "city": "London" },
-    { "id": 3, "name": "Charlie Brown", "email": "charlie@example.com", "city": "Paris" },
-    { "id": 4, "name": "Diana Prince", "email": "diana@example.com", "city": "Berlin" }
+    { "id": 1, "name": "Priya Sharma", "email": "priya@example.com", "city": "Mumbai" },
+    { "id": 2, "name": "Rahul Verma", "email": "rahul@example.com", "city": "Delhi" },
+    { "id": 3, "name": "Amit Patel", "email": "amit@example.com", "city": "Bangalore" },
+    { "id": 4, "name": "Sneha Reddy", "email": "sneha@example.com", "city": "Hyderabad" }
 ]

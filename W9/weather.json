@@ -4,24 +4,39 @@
         "condition": "Sunny",
         "humidity": "65%"
     },
-    "London": {
-        "temp": "15°C",
+    "Hyderabad": {
+        "temp": "35°C",
         "condition": "Cloudy",
-        "humidity": "80%"
+        "humidity": "40%"
     },
-    "New York": {
-        "temp": "22°C",
+    "Kolkata": {
+        "temp": "33°C",
         "condition": "Partly Cloudy",
-        "humidity": "55%"
+        "humidity": "70%"
     },
-    "Tokyo": {
-        "temp": "26°C",
+    "Ahmedabad": {
+        "temp": "38°C",
         "condition": "Clear Sky",
-        "humidity": "60%"
+        "humidity": "30%"
     },
     "Delhi": {
         "temp": "40°C",
         "condition": "Hot",
         "humidity": "25%"
+    },
+    "Pune": {
+        "temp": "28°C",
+        "condition": "Pleasant",
+        "humidity": "45%"
+    },
+    "Bangalore": {
+        "temp": "24°C",
+        "condition": "Drizzle",
+        "humidity": "75%"
+    },
+    "Chennai": {
+        "temp": "35°C",
+        "condition": "Humid",
+        "humidity": "85%"
     }
 }
