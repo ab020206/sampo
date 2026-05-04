@@ -1,0 +1,114 @@
+<!-- 
+W21 Design a backend system to manage books in an online bookstore using Node.js, Express.js, and MongoDB: 
+Add book, Retrieve books, Update book, Delete book. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W21 | Online Bookstore</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .form-group { margin-bottom: 10px; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px; cursor: pointer; margin-top: 10px; border: none; }
+        .add-btn { background: #007bff; color: white; width: 100%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .del-btn { background: #dc3545; color: white; }
+        .edit-btn { background: #ffc107; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Online Bookstore Management</h2>
+        <div id="bookForm">
+            <input type="hidden" id="bookId">
+            <div class="form-group"><input type="text" id="bookTitle" placeholder="Book Title"></div>
+            <div class="form-group"><input type="text" id="bookAuthor" placeholder="Author"></div>
+            <div class="form-group"><input type="number" id="bookPrice" placeholder="Price"></div>
+            <div class="form-group"><input type="text" id="bookCat" placeholder="Category"></div>
+            <button class="add-btn" id="saveBtn" onclick="saveBook()">Add Book</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bookBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function loadBooks() {
+            const res = await fetch('/api/books');
+            const data = await res.json();
+            const body = document.getElementById('bookBody');
+            body.innerHTML = '';
+            data.forEach(b => {
+                body.innerHTML += `<tr>
+                    <td>${b.title}</td>
+                    <td>${b.author}</td>
+                    <td>₹${b.price}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editBook('${b._id}', '${b.title}', '${b.author}', ${b.price}, '${b.category}')">Edit</button>
+                        <button class="del-btn" onclick="deleteBook('${b._id}')">Del</button>
+                    </td>
+                </tr>`;
+            });
+        }
+
+        async function saveBook() {
+            const id = document.getElementById('bookId').value;
+            const data = {
+                title: document.getElementById('bookTitle').value,
+                author: document.getElementById('bookAuthor').value,
+                price: document.getElementById('bookPrice').value,
+                category: document.getElementById('bookCat').value
+            };
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `/api/books/${id}` : '/api/books';
+
+            await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            clearForm();
+            loadBooks();
+        }
+
+        async function deleteBook(id) {
+            await fetch(`/api/books/${id}`, { method: 'DELETE' });
+            loadBooks();
+        }
+
+        function editBook(id, title, author, price, cat) {
+            document.getElementById('bookId').value = id;
+            document.getElementById('bookTitle').value = title;
+            document.getElementById('bookAuthor').value = author;
+            document.getElementById('bookPrice').value = price;
+            document.getElementById('bookCat').value = cat;
+            document.getElementById('saveBtn').innerText = 'Update Book';
+        }
+
+        function clearForm() {
+            document.getElementById('bookId').value = '';
+            document.getElementById('bookTitle').value = '';
+            document.getElementById('bookAuthor').value = '';
+            document.getElementById('bookPrice').value = '';
+            document.getElementById('bookCat').value = '';
+            document.getElementById('saveBtn').innerText = 'Add Book';
+        }
+
+        loadBooks();
+    </script>
+</body>
+</html>

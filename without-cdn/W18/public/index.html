@@ -1,0 +1,113 @@
+<!-- 
+W18 Perform the following tasks using Node.js, Express.js and MongoDB. 
+Tasks include: Create DB music, collection song details, Insert 5 songs, 
+Display count/list, filter by director/singer, delete/add songs, update actor/actress. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W18 | Music Database</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #333; color: white; }
+        .controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+        button { padding: 8px 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Music Database Management</h2>
+        
+        <div class="controls">
+            <button onclick="seedData()">Initialize (Seed 5 Songs)</button>
+            <button onclick="loadAll()">List All Songs</button>
+            <input type="text" id="directorInput" placeholder="Director Name">
+            <button onclick="getByDirector()">Search Director</button>
+            <input type="text" id="actorInput" placeholder="Actor">
+            <input type="text" id="actressInput" placeholder="Actress">
+            <button onclick="updateActors()">Update Top Row</button>
+        </div>
+
+        <div id="status"></div>
+
+        <table id="musicTable">
+            <thead>
+                <tr>
+                    <th>Song</th>
+                    <th>Film</th>
+                    <th>Director</th>
+                    <th>Singer</th>
+                    <th>Actor</th>
+                    <th>Actress</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="musicBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function seedData() {
+            const res = await fetch('/api/music/seed');
+            const data = await res.json();
+            alert(data.message);
+            loadAll();
+        }
+
+        async function loadAll() {
+            const res = await fetch('/api/music/all');
+            const { count, songs } = await res.json();
+            document.getElementById('status').innerText = `Total Songs: ${count}`;
+            render(songs);
+        }
+
+        async function getByDirector() {
+            const name = document.getElementById('directorInput').value;
+            const res = await fetch(`/api/music/director/${name}`);
+            const songs = await res.json();
+            render(songs);
+        }
+
+        async function deleteSong(id) {
+            await fetch(`/api/music/${id}`, { method: 'DELETE' });
+            loadAll();
+        }
+
+        async function updateActors() {
+            const rows = document.querySelectorAll('#musicBody tr');
+            if (rows.length === 0) return alert('No songs to update');
+            const id = rows[0].getAttribute('data-id');
+            const Actor = document.getElementById('actorInput').value;
+            const Actress = document.getElementById('actressInput').value;
+
+            await fetch(`/api/music/update-actors/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Actor, Actress })
+            });
+            loadAll();
+        }
+
+        function render(songs) {
+            const body = document.getElementById('musicBody');
+            body.innerHTML = '';
+            songs.forEach(s => {
+                body.innerHTML += `<tr data-id="${s._id}">
+                    <td>${s.Songname}</td>
+                    <td>${s.Film}</td>
+                    <td>${s.Music_director}</td>
+                    <td>${s.singer}</td>
+                    <td>${s.Actor || '-'}</td>
+                    <td>${s.Actress || '-'}</td>
+                    <td><button onclick="deleteSong('${s._id}')">Del</button></td>
+                </tr>`;
+            });
+        }
+    </script>
+</body>
+</html>

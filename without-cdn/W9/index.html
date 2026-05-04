@@ -1,0 +1,179 @@
+<!-- 
+W9 Create a weather application using JavaScript and AJAX where users enter a city name, 
+and AJAX fetches real-time weather data dynamically from local repository map having city with temperature, humidity, and conditions. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App | W9</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .weather-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: none;
+        }
+
+        .temp {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .details {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .error {
+            color: #dc3545;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="weather-box">
+        <h2>Weather Finder</h2>
+        <div class="input-group">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <button onclick="getWeather()">Search</button>
+        </div>
+
+        <div id="result" class="result">
+            <h3 id="resCity">City Name</h3>
+            <div id="resTemp" class="temp">--°C</div>
+            <div class="details">
+                <p><strong>Condition:</strong> <span id="resCond">--</span></p>
+                <p><strong>Humidity:</strong> <span id="resHum">--</span></p>
+            </div>
+        </div>
+        <div id="error" class="error">City not found in our database!</div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const city = document.getElementById('cityInput').value.trim();
+            const resultBox = document.getElementById('result');
+            const errorMsg = document.getElementById('error');
+
+            if (!city) return;
+
+            // Local Data Map (Fallback for local browser security)
+            const localData = {
+                "Mumbai": { "temp": "32°C", "condition": "Sunny", "humidity": "65%" },
+                "Delhi": { "temp": "40°C", "condition": "Hot", "humidity": "25%" },
+                "Pune": { "temp": "28°C", "condition": "Pleasant", "humidity": "45%" },
+                "Bangalore": { "temp": "24°C", "condition": "Drizzle", "humidity": "75%" },
+                "Chennai": { "temp": "35°C", "condition": "Humid", "humidity": "85%" },
+                "Hyderabad": { "temp": "35°C", "condition": "Cloudy", "humidity": "40%" },
+                "Kolkata": { "temp": "33°C", "condition": "Partly Cloudy", "humidity": "70%" },
+                "Ahmedabad": { "temp": "38°C", "condition": "Clear Sky", "humidity": "30%" }
+            };
+
+            try {
+                let data;
+                try {
+                    // Try to fetch from external file (AJAX)
+                    const response = await fetch('weather.json');
+                    if (response.ok) {
+                        data = await response.json();
+                    } else {
+                        throw new Error("File fetch failed");
+                    }
+                } catch (e) {
+                    // Fallback to local map if fetch is blocked by browser CORS policy
+                    console.warn("Using local fallback due to browser security/missing file.");
+                    data = localData;
+                }
+
+                const foundCity = Object.keys(data).find(k => k.toLowerCase() === city.toLowerCase());
+
+                if (foundCity) {
+                    const weather = data[foundCity];
+                    document.getElementById('resCity').innerText = foundCity;
+                    document.getElementById('resTemp').innerText = weather.temp;
+                    document.getElementById('resCond').innerText = weather.condition;
+                    document.getElementById('resHum').innerText = weather.humidity;
+
+                    resultBox.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                } else {
+                    resultBox.style.display = 'none';
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerText = "City not found in our database!";
+                }
+            } catch (err) {
+                console.error("Unexpected Error:", err);
+                errorMsg.innerText = "An unexpected error occurred.";
+                errorMsg.style.display = 'block';
+                resultBox.style.display = 'none';
+            }
+        }
+
+        // Allow Enter key
+        document.getElementById('cityInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getWeather();
+        });
+    </script>
+</body>
+
+</html>

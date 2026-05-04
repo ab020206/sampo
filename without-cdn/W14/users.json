@@ -1,0 +1,6 @@
+[
+    { "id": 1, "name": "Priya Sharma", "email": "priya@example.com", "city": "Mumbai" },
+    { "id": 2, "name": "Rahul Verma", "email": "rahul@example.com", "city": "Delhi" },
+    { "id": 3, "name": "Amit Patel", "email": "amit@example.com", "city": "Bangalore" },
+    { "id": 4, "name": "Sneha Reddy", "email": "sneha@example.com", "city": "Hyderabad" }
+]

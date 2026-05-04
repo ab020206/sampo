@@ -1,0 +1,146 @@
+<!-- 
+W17 Build an Employee Directory where employee details (name, designation, department, salary, and profile image) are stored in a JSON file. 
+A Node.js server should provide this data as an API, and a front-end page should fetch and display employee details. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W17 | Employee Directory API</title>
+    <!-- Bootstrap CSS -->
+    <link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="libs/bootstrap-icons/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+
+        .directory-container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .employee-row {
+            transition: background 0.2s;
+        }
+
+        .employee-row:hover {
+            background-color: #f1f5f9;
+        }
+
+        .emp-img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #eee;
+        }
+
+        .salary-badge {
+            background-color: #dcfce7;
+            color: #166534;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="directory-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold m-0 text-primary">Employee Directory</h2>
+                <button class="btn btn-outline-primary btn-sm" onclick="fetchEmployees()">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh Data
+                </button>
+            </div>
+
+            <p class="text-muted mb-4">Real-time personnel records served via Node.js API.</p>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Designation</th>
+                            <th>Department</th>
+                            <th>Annual Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeList">
+                        <!-- AJAX Data -->
+                        <tr id="loader">
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                Loading directory...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchEmployees() {
+            const list = document.getElementById('employeeList');
+            const loader = document.getElementById('loader');
+
+            try {
+                // Fetch from Node.js API
+                const response = await fetch('/api/employees');
+                if (!response.ok) throw new Error("API Failure");
+                
+                const employees = await response.json();
+                
+                // Clear existing
+                list.innerHTML = '';
+
+                employees.forEach(emp => {
+                    const row = `
+                        <tr class="employee-row">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+
+                                    <div>
+                                        <div class="fw-bold">${emp.name}</div>
+                                        <div class="text-muted small">ID: ${Math.floor(1000 + Math.random() * 9000)}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>${emp.designation}</td>
+                            <td><span class="badge bg-light text-dark border">${emp.department}</span></td>
+                            <td><span class="badge salary-badge px-3 py-2">$${emp.salary.toLocaleString()}</span></td>
+                        </tr>
+                    `;
+                    list.innerHTML += row;
+                });
+
+            } catch (err) {
+                list.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center text-danger py-4">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Failed to connect to Node.js server.
+                        </td>
+                    </tr>
+                `;
+                console.error('Fetch Error:', err);
+            }
+        }
+
+        // Initial fetch
+        fetchEmployees();
+    </script>
+</body>
+
+</html>

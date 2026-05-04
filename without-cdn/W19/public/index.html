@@ -1,0 +1,107 @@
+<!-- 
+W19 Perform the following tasks using Node.js, Express.js and MongoDB: 
+Tasks include: Create DB student, collection studentmarks, Insert marks, 
+Display count/list, filter by marks, update specified students, remove student. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W19 | Student Database</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #007bff; color: white; }
+        .controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+        button { padding: 8px 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Marks Management</h2>
+        
+        <div class="controls">
+            <button onclick="seedData()">Seed Data</button>
+            <button onclick="loadAll()">List All</button>
+            <button onclick="getDSBDA()">DSBDA > 20</button>
+            <button onclick="getAllHigh()">All Subjects > 25</button>
+            <input type="number" id="rollInput" placeholder="Roll No">
+            <button onclick="updateMarks()">+10 Marks</button>
+        </div>
+
+        <div id="status"></div>
+
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Name</th>
+                    <th>WAD</th>
+                    <th>CC</th>
+                    <th>DSBDA</th>
+                    <th>CNS</th>
+                    <th>AI</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function seedData() {
+            await fetch('/api/students/seed');
+            alert('Data Seeded');
+            loadAll();
+        }
+
+        async function loadAll() {
+            const res = await fetch('/api/students/all');
+            const { count, students } = await res.json();
+            document.getElementById('status').innerText = `Total Students: ${count}`;
+            render(students);
+        }
+
+        async function getDSBDA() {
+            const res = await fetch('/api/students/dsbda-gt-20');
+            render(await res.json());
+        }
+
+        async function getAllHigh() {
+            const res = await fetch('/api/students/all-gt-25');
+            render(await res.json());
+        }
+
+        async function updateMarks() {
+            const roll = document.getElementById('rollInput').value;
+            await fetch(`/api/students/update-marks/${roll}`, { method: 'PUT' });
+            loadAll();
+        }
+
+        async function deleteStudent(roll) {
+            await fetch(`/api/students/${roll}`, { method: 'DELETE' });
+            loadAll();
+        }
+
+        function render(students) {
+            const body = document.getElementById('studentBody');
+            body.innerHTML = '';
+            students.forEach(s => {
+                body.innerHTML += `<tr>
+                    <td>${s.Roll_No}</td>
+                    <td>${s.Name}</td>
+                    <td>${s.WAD_Marks}</td>
+                    <td>${s.CC_Marks}</td>
+                    <td>${s.DSBDA_Marks}</td>
+                    <td>${s.CNS_Marks}</td>
+                    <td>${s.AI_marks}</td>
+                    <td><button onclick="deleteStudent(${s.Roll_No})">Rem</button></td>
+                </tr>`;
+            });
+        }
+    </script>
+</body>
+</html>

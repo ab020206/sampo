@@ -1,0 +1,92 @@
+<!-- 
+W25 Design a simple personal portfolio mobile site using jQuery Mobile. 
+Include: About Me, Projects, Skills, Contact Info. 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>W25 | Mobile Portfolio</title>
+    <link rel="stylesheet" href="libs/jquery-mobile/jquery.mobile.min.css" />
+    <script src="libs/jquery/jquery.min.js"></script>
+    <script src="libs/jquery-mobile/jquery.mobile.min.js"></script>
+    <style>
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto 10px; }
+        .center-text { text-align: center; }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="portfolio-home">
+    <div data-role="header" data-theme="a">
+        <h1>My Portfolio</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div class="center-text">
+            
+            <h3>Arjun Kumar</h3>
+            <p>Full Stack Developer</p>
+        </div>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#aboutme">About Me</a></li>
+            <li><a href="#projects">My Projects</a></li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li><a href="#contactme">Get in Touch</a></li>
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="aboutme">
+    <div data-role="header">
+        <a href="#portfolio-home" data-icon="home">Home</a>
+        <h1>About Me</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>I am a passionate developer with expertise in building responsive web applications and mobile sites. I love solving complex problems with simple solutions.</p>
+    </div>
+</div>
+
+<div data-role="page" id="projects">
+    <div data-role="header">
+        <a href="#portfolio-home" data-icon="home">Home</a>
+        <h1>Projects</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true">
+            <li><h3>E-commerce App</h3><p>Built with Node.js and MongoDB.</p></li>
+            <li><h3>Portfolio Site</h3><p>Modern design with animations.</p></li>
+            <li><h3>Weather App</h3><p>Real-time data via OpenWeather API.</p></li>
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="skills">
+    <div data-role="header">
+        <a href="#portfolio-home" data-icon="home">Home</a>
+        <h1>Skills</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true">
+            <li>HTML5 / CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>Node.js / Express</li>
+            <li>MongoDB</li>
+            <li>jQuery Mobile</li>
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="contactme">
+    <div data-role="header">
+        <a href="#portfolio-home" data-icon="home">Home</a>
+        <h1>Contact</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>Email: arjun.kumar@example.com</p>
+        <p>LinkedIn: /in/arjunkumar</p>
+        <a href="mailto:arjun.kumar@example.com" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Send Email</a>
+    </div>
+</div>
+
+</body>
+</html>
