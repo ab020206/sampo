@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">User Profile</h4>
+                    <button class="btn btn-light btn-sm" onclick="logout()">Logout</button>
+                </div>
+                <div class="card-body" id="userData">
+                    <!-- User data will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        if (!user) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const userDataDiv = document.getElementById('userData');
+        userDataDiv.innerHTML = `
+            <table class="table table-borderless">
+                <tr><th>Name:</th><td>${user.name}</td></tr>
+                <tr><th>Email:</th><td>${user.email}</td></tr>
+                <tr><th>Mobile:</th><td>${user.mobile}</td></tr>
+                <tr><th>Date of Birth:</th><td>${user.dob}</td></tr>
+                <tr><th>City:</th><td>${user.city}</td></tr>
+                <tr><th>Address:</th><td>${user.address}</td></tr>
+            </table>
+        `;
+    };
+
+    function logout() {
+        sessionStorage.removeItem('loggedInUser');
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>

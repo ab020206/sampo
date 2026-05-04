@@ -2,31 +2,26 @@
     "Mumbai": {
         "temp": "32°C",
         "condition": "Sunny",
-        "humidity": "65%",
-        "wind": "12 km/h"
-    },
-    "Delhi": {
-        "temp": "42°C",
-        "condition": "Heat Wave",
-        "humidity": "20%",
-        "wind": "8 km/h"
+        "humidity": "65%"
     },
     "London": {
         "temp": "15°C",
         "condition": "Cloudy",
-        "humidity": "80%",
-        "wind": "20 km/h"
+        "humidity": "80%"
     },
     "New York": {
         "temp": "22°C",
         "condition": "Partly Cloudy",
-        "humidity": "50%",
-        "wind": "15 km/h"
+        "humidity": "55%"
     },
     "Tokyo": {
         "temp": "26°C",
         "condition": "Clear Sky",
-        "humidity": "55%",
-        "wind": "10 km/h"
+        "humidity": "60%"
+    },
+    "Delhi": {
+        "temp": "40°C",
+        "condition": "Hot",
+        "humidity": "25%"
     }
 }

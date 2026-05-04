@@ -7,91 +7,84 @@ The webpage should showcase personal details, skills, projects, educational deta
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W2 | Alex Dev - Portfolio</title>
+    <title>Portfolio | John Doe</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav>
-        <div class="logo">MyPortfolio</div>
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">My Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="#" class="logo">JohnDoe</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
     <header id="about">
-        <div class="header-content">
-            <img src="profile.png" alt="Profile" class="profile-img">
-            <h1>John Doe</h1>
-            <p>Web Developer & Designer</p>
-            <div class="socials">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
+        <div class="hero">
+            <h1>Hi, I'm John Doe</h1>
+            <p>A passionate Web Developer creating modern and functional web experiences.</p>
         </div>
     </header>
 
     <section id="skills" class="container">
-        <h2 class="section-title">My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">HTML & CSS</div>
-            <div class="skill-card">JavaScript</div>
-            <div class="skill-card">C++ Programming</div>
-            <div class="skill-card">Python</div>
-            <div class="skill-card">MySQL Database</div>
-            <div class="skill-card">PHP</div>
+        <h2>Technical Skills</h2>
+        <div class="skills-list">
+            <div class="skill">HTML & CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Bootstrap</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">SQL</div>
+            <div class="skill">Git</div>
         </div>
     </section>
 
     <section id="projects" class="container bg-light">
-        <h2 class="section-title">Projects</h2>
+        <h2>My Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <h3>Tic Tac Toe Game</h3>
-                <p>A simple game made using HTML, CSS and JS.</p>
-                <small>Web Dev</small>
-            </div>
-            <div class="project-card">
-                <h3>Student Info System</h3>
-                <p>A desktop application to manage student data.</p>
-                <small>Python</small>
+                <h3>E-Commerce Site</h3>
+                <p>A fully functional online store built with HTML, CSS, and JS.</p>
             </div>
             <div class="project-card">
                 <h3>Weather App</h3>
-                <p>Shows current weather using an API.</p>
-                <small>JavaScript</small>
+                <p>A real-time weather tracking application using OpenWeather API.</p>
+            </div>
+            <div class="project-card">
+                <h3>Task Manager</h3>
+                <p>A productivity tool to manage daily tasks and deadlines.</p>
             </div>
         </div>
     </section>
 
     <section id="education" class="container">
-        <h2 class="section-title">Education</h2>
+        <h2>Education</h2>
         <div class="edu-item">
-            <h3>Bachelor of Engineering</h3>
-            <p>ABC Institute of Technology | 2022 - 2026</p>
+            <h3>B.Tech in Computer Science</h3>
+            <p>University of Excellence | 2020 - 2024</p>
         </div>
         <div class="edu-item">
-            <h3>Higher Secondary School</h3>
-            <p>City Public School | 2020 - 2022</p>
+            <h3>High School</h3>
+            <p>City Public School | 2018 - 2020</p>
         </div>
     </section>
 
-    <section id="contact" class="container bg-dark text-white">
-        <h2 class="section-title text-white">Get In Touch</h2>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!')">
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Message" rows="5" required></textarea>
+    <section id="contact" class="container bg-light">
+        <h2>Get In Touch</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </section>
 
     <footer>
-        <p>&copy; 2026 Alex Dev. Built with Love.</p>
+        <p>&copy; 2026 John Doe Portfolio. All rights reserved.</p>
     </footer>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!-- 
-W24 Create a mobile site displaying static movie reviews with poster, genre, summary, and review. 
+W24 Create a mobile site that displays static reviews of 4–5 movies. 
+Each movie should include: Poster, Genre, Summary, Review. 
 -->
 <!DOCTYPE html>
 <html>
@@ -10,60 +11,74 @@ W24 Create a mobile site displaying static movie reviews with poster, genre, sum
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <style>
-        .movie-img { width: 100%; max-width: 250px; display: block; margin: 10px auto; border-radius: 8px; }
-        .review-text { font-style: italic; color: #555; }
+        .poster { width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; }
+        .movie-card { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
-<div data-role="page" id="home">
+<div data-role="page" id="movielist">
     <div data-role="header" data-theme="b">
-        <h1>Movie Central</h1>
+        <h1>CineReview Mobile</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <h3>Featured Reviews</h3>
         <ul data-role="listview" data-inset="true">
-            <li><a href="#movie1">The Great Adventure</a></li>
-            <li><a href="#movie2">Space Travels</a></li>
-            <li><a href="#movie3">Code Master</a></li>
+            <li>
+                <a href="#movie1">
+                    <img src="https://via.placeholder.com/150?text=Inception" />
+                    <h2>Inception</h2>
+                    <p>Genre: Sci-Fi / Action</p>
+                </a>
+            </li>
+            <li>
+                <a href="#movie2">
+                    <img src="https://via.placeholder.com/150?text=Interstellar" />
+                    <h2>Interstellar</h2>
+                    <p>Genre: Sci-Fi / Drama</p>
+                </a>
+            </li>
+            <li>
+                <a href="#movie3">
+                    <img src="https://via.placeholder.com/150?text=The+Dark+Knight" />
+                    <h2>The Dark Knight</h2>
+                    <p>Genre: Action / Crime</p>
+                </a>
+            </li>
+            <li>
+                <a href="#movie4">
+                    <img src="https://via.placeholder.com/150?text=Parasite" />
+                    <h2>Parasite</h2>
+                    <p>Genre: Thriller / Drama</p>
+                </a>
+            </li>
         </ul>
-        <img src="movies.png" style="width:100%; opacity:0.8;">
     </div>
 </div>
 
-<!-- Movie 1 -->
+<!-- Movie Details Template -->
 <div data-role="page" id="movie1">
     <div data-role="header">
-        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
-        <h1>Review</h1>
+        <a href="#movielist" data-icon="back">List</a>
+        <h1>Inception</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <h2>The Great Adventure</h2>
-        <p><strong>Genre:</strong> Action / Thriller</p>
-        <img src="https://via.placeholder.com/200x300?text=Poster+1" class="movie-img">
-        <h3>Summary</h3>
-        <p>A group of explorers travel deep into the jungle to find a lost treasure.</p>
-        <h3>Review</h3>
-        <p class="review-text">"An amazing journey with stunning visuals and great acting. A must-watch for adventure fans!"</p>
-        <p>Rating: ⭐⭐⭐⭐⭐</p>
+        <img src="https://via.placeholder.com/400x300?text=Inception+Poster" class="poster">
+        <h3>Genre: Sci-Fi</h3>
+        <p><strong>Summary:</strong> A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.</p>
+        <p><strong>Review:</strong> Mind-bending visuals and a complex plot make this a modern masterpiece. ⭐ 9/10</p>
     </div>
 </div>
 
-<!-- Movie 2 -->
 <div data-role="page" id="movie2">
     <div data-role="header">
-        <a href="#home" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
-        <h1>Review</h1>
+        <a href="#movielist" data-icon="back">List</a>
+        <h1>Interstellar</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <h2>Space Travels</h2>
-        <p><strong>Genre:</strong> Sci-Fi</p>
-        <img src="https://via.placeholder.com/200x300?text=Poster+2" class="movie-img">
-        <h3>Summary</h3>
-        <p>A mission to Mars goes wrong when a mysterious signal is detected from a distant galaxy.</p>
-        <h3>Review</h3>
-        <p class="review-text">"Thought-provoking and intense. The special effects are top-notch."</p>
-        <p>Rating: ⭐⭐⭐⭐</p>
+        <img src="https://via.placeholder.com/400x300?text=Interstellar+Poster" class="poster">
+        <h3>Genre: Sci-Fi / Drama</h3>
+        <p><strong>Summary:</strong> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+        <p><strong>Review:</strong> An emotional journey across space and time with stunning cinematography. ⭐ 9.5/10</p>
     </div>
 </div>
 

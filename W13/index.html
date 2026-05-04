@@ -1,114 +1,97 @@
 <!-- 
-W13 Create an Angular application with user registration, login, and profile display. 
+W13 Create an Angular application which will do following actions: User Registration, Login User, Show User Data on Profile Component. 
 -->
 <!DOCTYPE html>
-<html ng-app="authApp">
+<html ng-app="userApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W13 | Angular Auth & Profile</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- AngularJS CDN -->
+    <title>W13 | Angular Auth</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <style>
-        body { background: #f0f2f5; height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .auth-container { width: 100%; max-width: 450px; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .profile-pic { width: 100px; height: 100px; border-radius: 50%; background: #eef2ff; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #6366f1; }
+        body { font-family: sans-serif; background: #eee; padding: 20px; }
+        .box { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        .nav-links { text-align: center; margin-top: 10px; color: blue; cursor: pointer; }
+        .profile { text-align: center; }
     </style>
 </head>
-<body ng-controller="AuthController">
+<body ng-controller="UserController">
+    <div class="box">
+        <!-- Registration View -->
+        <div ng-if="view == 'register'">
+            <h2>User Registration</h2>
+            <div class="form-group">
+                <input type="text" ng-model="regData.name" placeholder="Full Name">
+            </div>
+            <div class="form-group">
+                <input type="email" ng-model="regData.email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" ng-model="regData.password" placeholder="Password">
+            </div>
+            <button ng-click="register()">Register</button>
+            <div class="nav-links" ng-click="setView('login')">Already have an account? Login</div>
+        </div>
 
-<div class="auth-container">
-    
-    <!-- Registration View -->
-    <div ng-show="currentView == 'register'">
-        <h2 class="fw-bold mb-4">Create Account</h2>
-        <div class="mb-3">
-            <input type="text" class="form-control form-control-lg bg-light border-0" placeholder="Username" ng-model="regData.name">
+        <!-- Login View -->
+        <div ng-if="view == 'login'">
+            <h2>User Login</h2>
+            <div class="form-group">
+                <input type="email" ng-model="loginData.email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" ng-model="loginData.password" placeholder="Password">
+            </div>
+            <button ng-click="login()">Login</button>
+            <div class="nav-links" ng-click="setView('register')">Need an account? Register</div>
         </div>
-        <div class="mb-3">
-            <input type="email" class="form-control form-control-lg bg-light border-0" placeholder="Email" ng-model="regData.email">
+
+        <!-- Profile View -->
+        <div ng-if="view == 'profile'" class="profile">
+            <h2>User Profile</h2>
+            <p><strong>Name:</strong> {{ currentUser.name }}</p>
+            <p><strong>Email:</strong> {{ currentUser.email }}</p>
+            <button style="background:#dc3545" ng-click="logout()">Logout</button>
         </div>
-        <div class="mb-4">
-            <input type="password" class="form-control form-control-lg bg-light border-0" placeholder="Password" ng-model="regData.pass">
-        </div>
-        <button class="btn btn-primary btn-lg w-100 rounded-pill mb-3" ng-click="register()">Sign Up</button>
-        <p class="text-center text-muted small">Already registered? <a href="#" ng-click="currentView = 'login'">Log in</a></p>
     </div>
 
-    <!-- Login View -->
-    <div ng-show="currentView == 'login'">
-        <h2 class="fw-bold mb-4">Welcome Back</h2>
-        <div class="mb-3">
-            <input type="email" class="form-control form-control-lg bg-light border-0" placeholder="Email" ng-model="loginData.email">
-        </div>
-        <div class="mb-4">
-            <input type="password" class="form-control form-control-lg bg-light border-0" placeholder="Password" ng-model="loginData.pass">
-        </div>
-        <button class="btn btn-success btn-lg w-100 rounded-pill mb-3" ng-click="login()">Log In</button>
-        <p class="text-center text-muted small">New user? <a href="#" ng-click="currentView = 'register'">Create account</a></p>
-    </div>
-
-    <!-- Profile View -->
-    <div ng-show="currentView == 'profile'" class="text-center">
-        <h2 class="fw-bold mb-4">User Profile</h2>
-        <div class="profile-pic">
-            {{ loggedUser.name[0] | uppercase }}
-        </div>
-        <h3 class="mb-1">{{ loggedUser.name }}</h3>
-        <p class="text-muted mb-4">{{ loggedUser.email }}</p>
-        
-        <div class="alert alert-info py-2 small mb-4">
-            Login Successful via Angular Binding
-        </div>
-
-        <button class="btn btn-outline-danger rounded-pill px-5" ng-click="logout()">Sign Out</button>
-    </div>
-
-</div>
-
-<script>
-    var app = angular.module('authApp', []);
-
-    app.controller('AuthController', function($scope) {
-        $scope.currentView = 'register';
-        $scope.users = [];
-        $scope.regData = {};
-        $scope.loginData = {};
-        $scope.loggedUser = null;
-
-        // Register Action
-        $scope.register = function() {
-            if (!$scope.regData.name || !$scope.regData.email || !$scope.regData.pass) {
-                alert("Please fill all fields.");
-                return;
-            }
-            $scope.users.push(angular.copy($scope.regData));
-            alert("Registration successful! You can login now.");
+    <script>
+        var app = angular.module('userApp', []);
+        app.controller('UserController', function($scope) {
+            $scope.view = 'register';
+            $scope.users = [];
             $scope.regData = {};
-            $scope.currentView = 'login';
-        };
+            $scope.loginData = {};
+            $scope.currentUser = null;
 
-        // Login Action
-        $scope.login = function() {
-            var user = $scope.users.find(u => u.email === $scope.loginData.email && u.pass === $scope.loginData.pass);
-            if (user) {
-                $scope.loggedUser = user;
-                $scope.currentView = 'profile';
-                $scope.loginData = {};
-            } else {
-                alert("Invalid email or password!");
-            }
-        };
+            $scope.setView = function(v) { $scope.view = v; };
 
-        // Logout Action
-        $scope.logout = function() {
-            $scope.loggedUser = null;
-            $scope.currentView = 'login';
-        };
-    });
-</script>
+            $scope.register = function() {
+                if (!$scope.regData.name || !$scope.regData.email || !$scope.regData.password) return alert('Fill all fields');
+                $scope.users.push(angular.copy($scope.regData));
+                alert('Registered successfully!');
+                $scope.regData = {};
+                $scope.view = 'login';
+            };
 
+            $scope.login = function() {
+                var user = $scope.users.find(u => u.email === $scope.loginData.email && u.password === $scope.loginData.password);
+                if (user) {
+                    $scope.currentUser = user;
+                    $scope.view = 'profile';
+                } else {
+                    alert('Invalid credentials');
+                }
+            };
+
+            $scope.logout = function() {
+                $scope.currentUser = null;
+                $scope.view = 'login';
+            };
+        });
+    </script>
 </body>
 </html>

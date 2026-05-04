@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W11 | Registered Users</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        .back-btn { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">Back to Form</a>
+        <h2>Registered Users Data List</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>DOB</th>
+                    <th>City</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="userBody">
+                <!-- Data will be loaded from local storage -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const body = document.getElementById('userBody');
+        
+        if (users.length === 0) {
+            body.innerHTML = '<tr><td colspan="6" style="text-align:center">No users registered yet.</td></tr>';
+        } else {
+            users.forEach(u => {
+                const row = `<tr>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>${u.mobile}</td>
+                    <td>${u.dob}</td>
+                    <td>${u.city}</td>
+                    <td>${u.address}</td>
+                </tr>`;
+                body.innerHTML += row;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,64 +1,64 @@
 <!-- 
-W23 Create a mobile website displaying student clubs with description, achievements, and images. 
+W23 Build a mobile website to display student clubs and extracurricular activities at PICT. 
+Each club should include: Name, Description, Achievements, Static images. 
 -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>W23 | Student Clubs</title>
+    <title>W23 | PICT Clubs</title>
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .club-img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
 
-<div data-role="page" id="clubsHome">
+<!-- Main Page -->
+<div data-role="page" id="main">
     <div data-role="header" data-theme="a">
-        <h1>College Clubs</h1>
+        <h1>PICT Student Clubs</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <ul data-role="listview" data-inset="true">
+        <ul data-role="listview" data-inset="true" data-filter="true" data-placeholder="Search clubs...">
             <li><a href="#acm">ACM Student Chapter</a></li>
             <li><a href="#ieee">IEEE Student Branch</a></li>
-            <li><a href="#arts">Fine Arts Club</a></li>
-            <li><a href="#sports">Sports Club</a></li>
+            <li><a href="#pasc">PICT ACM Student Chapter</a></li>
+            <li><a href="#art">Art Circle</a></li>
         </ul>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>&copy; 2026 PICT Student Life</h4>
     </div>
 </div>
 
 <!-- ACM Club Page -->
 <div data-role="page" id="acm">
     <div data-role="header">
-        <a href="#clubsHome" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
-        <h1>ACM Club</h1>
+        <a href="#main" data-icon="back">Back</a>
+        <h1>ACM Chapter</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <h3>Description</h3>
-        <p>ACM is the world's largest educational and scientific computing society.</p>
-        <h3>Achievements</h3>
-        <ul>
-            <li>Won National Coding Competition 2024</li>
-            <li>Organized successful Hackathon with 500+ participants</li>
-        </ul>
-        <img src="https://via.placeholder.com/300x150?text=ACM+Event" style="width:100%; border-radius:10px;">
+        <img src="https://via.placeholder.com/400x200?text=ACM+PICT" class="club-img">
+        <h2>ACM Student Chapter</h2>
+        <p><strong>Description:</strong> A community of computer science enthusiasts promoting technical excellence through workshops and hackathons.</p>
+        <p><strong>Achievements:</strong> Organized national-level Pulzion event, high participation in ICPC.</p>
     </div>
 </div>
 
 <!-- IEEE Club Page -->
 <div data-role="page" id="ieee">
     <div data-role="header">
-        <a href="#clubsHome" class="ui-btn ui-icon-back ui-btn-icon-left">Back</a>
-        <h1>IEEE Club</h1>
+        <a href="#main" data-icon="back">Back</a>
+        <h1>IEEE Branch</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <h3>Description</h3>
-        <p>IEEE is dedicated to advancing technology for the benefit of humanity.</p>
-        <h3>Achievements</h3>
-        <ul>
-            <li>Published 5 Research Papers in 2023</li>
-            <li>Best Student Branch Award 2022</li>
-        </ul>
-        <img src="https://via.placeholder.com/300x150?text=IEEE+Workshop" style="width:100%; border-radius:10px;">
+        <img src="https://via.placeholder.com/400x200?text=IEEE+PICT" class="club-img">
+        <h2>IEEE Student Branch</h2>
+        <p><strong>Description:</strong> Focuses on electronics, power systems, and robotics research and development.</p>
+        <p><strong>Achievements:</strong> Best Student Branch award in Pune Section, Multiple research papers published.</p>
     </div>
 </div>
 

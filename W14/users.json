@@ -1,6 +1,6 @@
 [
-    { "id": 1, "name": "Rahul Sharma", "email": "rahul@example.com", "role": "Full Stack Developer" },
-    { "id": 2, "name": "Anita Gupta", "email": "anita@example.com", "role": "UI Designer" },
-    { "id": 3, "name": "Vicky Patel", "email": "vicky@example.com", "role": "Backend Engineer" },
-    { "id": 4, "name": "Sanya Singh", "email": "sanya@example.com", "role": "Data Analyst" }
+    { "id": 1, "name": "Alice Johnson", "email": "alice@example.com", "city": "New York" },
+    { "id": 2, "name": "Bob Smith", "email": "bob@example.com", "city": "London" },
+    { "id": 3, "name": "Charlie Brown", "email": "charlie@example.com", "city": "Paris" },
+    { "id": 4, "name": "Diana Prince", "email": "diana@example.com", "city": "Berlin" }
 ]

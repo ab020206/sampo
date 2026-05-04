@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Wireless Headphones",
+        "price": 99.99,
+        "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+    },
+    {
+        "id": 2,
+        "name": "Smart Watch",
+        "price": 199.50,
+        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80"
+    },
+    {
+        "id": 3,
+        "name": "Camera Lens",
+        "price": 549.00,
+        "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80"
+    },
+    {
+        "id": 4,
+        "name": "Mechanical Keyboard",
+        "price": 129.99,
+        "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=500&q=80"
+    }
+]

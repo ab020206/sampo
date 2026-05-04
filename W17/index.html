@@ -1,0 +1,53 @@
+<!-- 
+W17 Build an Employee Directory where employee details (name, designation, department, salary, and profile image) are stored in a JSON file. 
+A Node.js server should provide this data as an API, and a front-end page should fetch and display employee details. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W17 | Employee Directory</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .employee-list { margin-top: 20px; }
+        .emp-card { display: flex; align-items: center; border-bottom: 1px solid #eee; padding: 15px; }
+        .emp-card img { border-radius: 50%; margin-right: 20px; }
+        .emp-info h3 { margin: 0; font-size: 1.2rem; }
+        .emp-info p { margin: 5px 0; color: #666; font-size: 0.9rem; }
+        .salary { color: #28a745; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Directory</h2>
+        <div id="employeeList" class="employee-list">
+            <!-- Employees loaded here -->
+        </div>
+    </div>
+
+    <script>
+        async function fetchEmployees() {
+            try {
+                const response = await fetch('/api/employees');
+                const employees = await response.json();
+                const list = document.getElementById('employeeList');
+                employees.forEach(emp => {
+                    list.innerHTML += `<div class="emp-card">
+                        <img src="${emp.image}" alt="${emp.name}">
+                        <div class="emp-info">
+                            <h3>${emp.name}</h3>
+                            <p>${emp.designation} | ${emp.department}</p>
+                            <p class="salary">Salary: $${emp.salary}</p>
+                        </div>
+                    </div>`;
+                });
+            } catch (err) {
+                console.error('Error fetching employees:', err);
+            }
+        }
+        fetchEmployees();
+    </script>
+</body>
+</html>

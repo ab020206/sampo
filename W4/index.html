@@ -1,99 +1,74 @@
 <!-- 
 W4 Develop a webpage for an online course listing using HTML and CSS, showcasing available courses and their details. 
-Include course name, instructor, duration, and fee. 
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W4 | EduStream - Course Listing</title>
+    <title>Course Listing | W4</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <div class="container nav-flex">
-            <div class="logo">MyCourses</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search courses...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <button class="login-btn">Login</button>
-            </div>
-        </div>
-    </nav>
+    <div class="container">
+        <header>
+            <h1>Online Learning Platform</h1>
+            <p>Expand your knowledge with our expert-led courses</p>
+        </header>
 
-    <header>
-        <div class="container">
-            <h1>Learn New Skills Online</h1>
-            <p>Pick a course and start learning today.</p>
-        </div>
-    </header>
-
-    <section class="container">
-        <h2 class="section-title">Courses</h2>
-        <div class="course-list">
+        <div class="course-grid">
             <div class="course-card">
-                <div class="course-img" style="background-image: url('courses.png');">
-                </div>
-                <div class="course-details">
-                    <h3>Web Development Course</h3>
-                    <p class="instructor"><i class="fas fa-chalkboard-teacher"></i> Mr. Rahul Sharma</p>
-                    <div class="meta">
-                        <span><i class="far fa-clock"></i> 20 Hours</span>
-                        <span><i class="fas fa-signal"></i> Beginner</span>
-                    </div>
+                <div class="course-info">
+                    <h3>Web Development Bootcamp</h3>
+                    <p class="instructor">Instructor: Alex Smith</p>
+                    <p class="details">Learn HTML, CSS, and JS from scratch. Master the fundamentals of web design.</p>
                     <div class="footer">
-                        <span class="fee">$50</span>
-                        <button class="enroll-btn">Join Now</button>
+                        <span class="duration">12 Weeks</span>
+                        <span class="price">$49.99</span>
                     </div>
                 </div>
             </div>
 
             <div class="course-card">
-                <div class="course-img" style="background-image: url('courses.png');">
-                </div>
-                <div class="course-details">
-                    <h3>Python Programming</h3>
-                    <p class="instructor"><i class="fas fa-chalkboard-teacher"></i> Ms. Anita Gupta</p>
-                    <div class="meta">
-                        <span><i class="far fa-clock"></i> 15 Hours</span>
-                        <span><i class="fas fa-signal"></i> Beginner</span>
-                    </div>
+                <div class="course-info">
+                    <h3>Data Science with Python</h3>
+                    <p class="instructor">Instructor: Dr. Sarah Jane</p>
+                    <p class="details">Analyze data, build models, and visualize results using Python and Pandas.</p>
                     <div class="footer">
-                        <span class="fee">$40</span>
-                        <button class="enroll-btn">Join Now</button>
+                        <span class="duration">8 Weeks</span>
+                        <span class="price">$59.99</span>
                     </div>
                 </div>
             </div>
 
             <div class="course-card">
-                <div class="course-img" style="background-image: url('courses.png');">
-                </div>
-                <div class="course-details">
-                    <h3>Graphic Design</h3>
-                    <p class="instructor"><i class="fas fa-chalkboard-teacher"></i> Mr. Vicky Patel</p>
-                    <div class="meta">
-                        <span><i class="far fa-clock"></i> 10 Hours</span>
-                        <span><i class="fas fa-signal"></i> All Levels</span>
-                    </div>
+                <div class="course-info">
+                    <h3>UI/UX Design Masterclass</h3>
+                    <p class="instructor">Instructor: Michael Ross</p>
+                    <p class="details">Create stunning user interfaces and great user experiences with Figma.</p>
                     <div class="footer">
-                        <span class="fee">$30</span>
-                        <button class="enroll-btn">Join Now</button>
+                        <span class="duration">6 Weeks</span>
+                        <span class="price">$39.99</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-info">
+                    <h3>Digital Marketing 101</h3>
+                    <p class="instructor">Instructor: Emily White</p>
+                    <p class="details">Learn SEO, SEM, and social media marketing to grow your business online.</p>
+                    <div class="footer">
+                        <span class="duration">4 Weeks</span>
+                        <span class="price">$29.99</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 My Learning Website</p>
-        </div>
-    </footer>
+        <footer>
+            <p>&copy; 2026 EduOnline. Start learning today!</p>
+        </footer>
+    </div>
 </body>
 </html>

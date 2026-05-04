@@ -1,46 +1,48 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
+
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://localhost:27017/employeeDB');
+mongoose.connect('mongodb://localhost:27017/employeeDB')
+    .then(() => console.log('Connected to employeeDB'))
+    .catch(err => console.error(err));
 
-// Employee Schema
 const employeeSchema = new mongoose.Schema({
     name: String,
+    email: String,
     position: String,
-    salary: Number,
-    email: String
+    salary: Number
 });
 
 const Employee = mongoose.model('Employee', employeeSchema);
 
-// CRUD Operations
-
-// CREATE
-app.post('/employees', async (req, res) => {
-    const emp = new Employee(req.body);
-    await emp.save();
-    res.status(201).send(emp);
-});
-
-// READ
-app.get('/employees', async (req, res) => {
+// View all
+app.get('/api/employees', async (req, res) => {
     const employees = await Employee.find();
     res.send(employees);
 });
 
-// UPDATE
-app.put('/employees/:id', async (req, res) => {
-    const emp = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.send(emp);
+// Add
+app.post('/api/employees', async (req, res) => {
+    const employee = new Employee(req.body);
+    await employee.save();
+    res.send(employee);
 });
 
-// DELETE
-app.delete('/employees/:id', async (req, res) => {
+// Update
+app.put('/api/employees/:id', async (req, res) => {
+    const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.send(employee);
+});
+
+// Delete
+app.delete('/api/employees/:id', async (req, res) => {
     await Employee.findByIdAndDelete(req.params.id);
-    res.send({ message: "Employee record removed." });
+    res.send({ message: 'Employee deleted' });
 });
 
-app.listen(3000, () => console.log('Employee CRUD API running on port 3000'));
+const PORT = 3006;
+app.listen(PORT, () => console.log(`W20 Employee server at http://localhost:${PORT}`));

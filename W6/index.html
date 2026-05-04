@@ -1,120 +1,117 @@
 <!-- 
-W6 Create a responsive web page for a college website with a top navbar and display toppers data statistics (year-wise) in cards using Bootstrap. 
+W6 Create a responsive web page for College website with top navbar and display toppers data statistics (year wise) in card using Bootstrap. 
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W6 | City College</title>
+    <title>College Portal | W6</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('college.png');
-            background-size: cover;
-            background-position: center;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .hero-banner {
+            background-color: #003366;
             color: white;
+            padding: 60px 0;
             text-align: center;
         }
-        .topper-card {
+        .card-topper {
             border: none;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #003366;
+            transition: 0.3s;
         }
-        .topper-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .card-topper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .navbar-brand { font-weight: 700; }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ST. JUDE'S COLLEGE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Notice Board</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">CITY COLLEGE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Departments</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Admissions</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Notice Board</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-            </ul>
+    <!-- Hero -->
+    <div class="hero-banner">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Academic Excellence</h1>
+            <p class="lead">Nurturing minds and shaping futures since 1980.</p>
         </div>
     </div>
-</nav>
 
-<!-- Hero Section -->
-<div class="hero-section">
-    <div class="container">
-        <h1 class="display-4 fw-bold">Excellence in Education</h1>
-        <p class="lead">Building a better future for our students since 1995.</p>
-    </div>
-</div>
+    <!-- Toppers Statistics -->
+    <div class="container my-5">
+        <h2 class="text-center mb-5 fw-bold">Our Academic Toppers</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- 2024 -->
+            <div class="col">
+                <div class="card h-100 card-topper shadow-sm text-center">
+                    <div class="card-body">
+                        <div class="badge bg-primary mb-3">Academic Year 2024</div>
+                        <h4 class="card-title">Sarah Johnson</h4>
+                        <p class="text-muted">B.Sc Computer Science</p>
+                        <h2 class="text-success fw-bold">98.4%</h2>
+                        <hr>
+                        <p class="small text-secondary">Secured 1st Rank in University Finals.</p>
+                    </div>
+                </div>
+            </div>
 
-<!-- Toppers Section -->
-<div class="container my-5">
-    <h2 class="text-center mb-5 fw-bold">Our Academic Toppers</h2>
-    <div class="row g-4">
-        <!-- 2024 -->
-        <div class="col-md-4">
-            <div class="card topper-card text-center h-100 p-4">
-                <div class="card-body">
-                    <h5 class="text-primary mb-3">Batch 2024</h5>
-                    <h3 class="card-title">Rahul Kumar</h3>
-                    <p class="text-muted">Computer Engineering</p>
-                    <div class="display-6 fw-bold text-success">98.5%</div>
-                    <p class="mt-2 text-secondary">Rank: 1st in University</p>
+            <!-- 2023 -->
+            <div class="col">
+                <div class="card h-100 card-topper shadow-sm text-center">
+                    <div class="card-body">
+                        <div class="badge bg-primary mb-3">Academic Year 2023</div>
+                        <h4 class="card-title">David Miller</h4>
+                        <p class="text-muted">B.Tech Mechanical</p>
+                        <h2 class="text-success fw-bold">96.8%</h2>
+                        <hr>
+                        <p class="small text-secondary">Outstanding performance in Research & Design.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 -->
+            <div class="col">
+                <div class="card h-100 card-topper shadow-sm text-center">
+                    <div class="card-body">
+                        <div class="badge bg-primary mb-3">Academic Year 2022</div>
+                        <h4 class="card-title">Emily White</h4>
+                        <p class="text-muted">BA English Literature</p>
+                        <h2 class="text-success fw-bold">97.2%</h2>
+                        <hr>
+                        <p class="small text-secondary">Gold Medalist in Creative Writing.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- 2023 -->
-        <div class="col-md-4">
-            <div class="card topper-card text-center h-100 p-4">
-                <div class="card-body">
-                    <h5 class="text-primary mb-3">Batch 2023</h5>
-                    <h3 class="card-title">Sanya Singh</h3>
-                    <p class="text-muted">Information Technology</p>
-                    <div class="display-6 fw-bold text-success">96.2%</div>
-                    <p class="mt-2 text-secondary">Rank: 1st in College</p>
-                </div>
-            </div>
-        </div>
-        <!-- 2022 -->
-        <div class="col-md-4">
-            <div class="card topper-card text-center h-100 p-4">
-                <div class="card-body">
-                    <h5 class="text-primary mb-3">Batch 2022</h5>
-                    <h3 class="card-title">Amit Patel</h3>
-                    <p class="text-muted">Mechanical Engineering</p>
-                    <div class="display-6 fw-bold text-success">95.8%</div>
-                    <p class="mt-2 text-secondary">Rank: 2nd in University</p>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
-    <div class="container text-center">
-        <p class="mb-0">&copy; 2026 City College of Arts & Science. All Rights Reserved.</p>
-        <small class="text-muted">Affiliated to State University</small>
-    </div>
-</footer>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2026 St. Jude's College of Arts & Science. All Rights Reserved.</p>
+            <div class="small">Affiliated to National University | Recognized by UGC</div>
+        </div>
+    </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

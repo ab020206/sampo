@@ -1,113 +1,114 @@
 <!-- 
-W21 Create a backend system using Node.js, Express.js, and MongoDB for managing books (CRUD operations). 
+W21 Design a backend system to manage books in an online bookstore using Node.js, Express.js, and MongoDB: 
+Add book, Retrieve books, Update book, Delete book. 
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W21 | Book Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>W21 | Online Bookstore</title>
     <style>
-        body { background: #f4f7f6; padding: 40px 0; }
-        .book-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .btn-action { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .form-group { margin-bottom: 10px; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px; cursor: pointer; margin-top: 10px; border: none; }
+        .add-btn { background: #007bff; color: white; width: 100%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .del-btn { background: #dc3545; color: white; }
+        .edit-btn { background: #ffc107; margin-right: 5px; }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card book-card p-4 mb-4">
-                <h4 id="formTitle">Add Book</h4>
-                <input type="hidden" id="bookId">
-                <div class="mb-2"><input id="title" class="form-control" placeholder="Book Title"></div>
-                <div class="mb-2"><input id="author" class="form-control" placeholder="Author"></div>
-                <div class="mb-2"><input id="price" type="number" class="form-control" placeholder="Price"></div>
-                <div class="mb-3"><input id="cat" class="form-control" placeholder="Category"></div>
-                <button id="saveBtn" class="btn btn-primary w-100" onclick="saveBook()">Save Book</button>
-            </div>
-            <img src="books.png" class="img-fluid rounded shadow-sm opacity-75">
+    <div class="container">
+        <h2>Online Bookstore Management</h2>
+        <div id="bookForm">
+            <input type="hidden" id="bookId">
+            <div class="form-group"><input type="text" id="bookTitle" placeholder="Book Title"></div>
+            <div class="form-group"><input type="text" id="bookAuthor" placeholder="Author"></div>
+            <div class="form-group"><input type="number" id="bookPrice" placeholder="Price"></div>
+            <div class="form-group"><input type="text" id="bookCat" placeholder="Category"></div>
+            <button class="add-btn" id="saveBtn" onclick="saveBook()">Add Book</button>
         </div>
 
-        <div class="col-md-8">
-            <div class="card book-card p-4">
-                <h4 class="mb-4">Book Repository</h4>
-                <table class="table table-hover align-middle">
-                    <thead class="table-light">
-                        <tr><th>Title</th><th>Author</th><th>Price</th><th>Action</th></tr>
-                    </thead>
-                    <tbody id="bookTable"></tbody>
-                </table>
-            </div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bookBody"></tbody>
+        </table>
     </div>
-</div>
 
-<script>
-    async function loadBooks() {
-        const res = await fetch('/api/books');
-        const books = await res.json();
-        document.getElementById('bookTable').innerHTML = books.map(b => `
-            <tr>
-                <td><strong>${b.title}</strong><br><small class="text-muted">${b.category}</small></td>
-                <td>${b.author}</td>
-                <td class="text-success fw-bold">$${b.price}</td>
-                <td>
-                    <button class="btn btn-sm btn-info text-white me-1" onclick="editBook('${b._id}','${b.title}','${b.author}',${b.price},'${b.category}')">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteBook('${b._id}')">Delete</button>
-                </td>
-            </tr>
-        `).join('');
-    }
+    <script>
+        async function loadBooks() {
+            const res = await fetch('/api/books');
+            const data = await res.json();
+            const body = document.getElementById('bookBody');
+            body.innerHTML = '';
+            data.forEach(b => {
+                body.innerHTML += `<tr>
+                    <td>${b.title}</td>
+                    <td>${b.author}</td>
+                    <td>$${b.price}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editBook('${b._id}', '${b.title}', '${b.author}', ${b.price}, '${b.category}')">Edit</button>
+                        <button class="del-btn" onclick="deleteBook('${b._id}')">Del</button>
+                    </td>
+                </tr>`;
+            });
+        }
 
-    async function saveBook() {
-        const id = document.getElementById('bookId').value;
-        const data = {
-            title: document.getElementById('title').value,
-            author: document.getElementById('author').value,
-            price: document.getElementById('price').value,
-            category: document.getElementById('cat').value
-        };
+        async function saveBook() {
+            const id = document.getElementById('bookId').value;
+            const data = {
+                title: document.getElementById('bookTitle').value,
+                author: document.getElementById('bookAuthor').value,
+                price: document.getElementById('bookPrice').value,
+                category: document.getElementById('bookCat').value
+            };
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `/api/books/${id}` : '/api/books';
 
-        const method = id ? 'PUT' : 'POST';
-        const url = id ? '/api/books/' + id : '/api/books';
-
-        await fetch(url, {
-            method: method,
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        });
-
-        resetForm();
-        loadBooks();
-    }
-
-    async function deleteBook(id) {
-        if(confirm("Remove this book?")) {
-            await fetch('/api/books/' + id, { method: 'DELETE' });
+            await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            clearForm();
             loadBooks();
         }
-    }
 
-    function editBook(id, title, author, price, cat) {
-        document.getElementById('bookId').value = id;
-        document.getElementById('title').value = title;
-        document.getElementById('author').value = author;
-        document.getElementById('price').value = price;
-        document.getElementById('cat').value = cat;
-        document.getElementById('formTitle').innerText = "Edit Book";
-    }
+        async function deleteBook(id) {
+            await fetch(`/api/books/${id}`, { method: 'DELETE' });
+            loadBooks();
+        }
 
-    function resetForm() {
-        document.getElementById('bookId').value = "";
-        document.querySelectorAll('input').forEach(i => i.value = "");
-        document.getElementById('formTitle').innerText = "Add Book";
-    }
+        function editBook(id, title, author, price, cat) {
+            document.getElementById('bookId').value = id;
+            document.getElementById('bookTitle').value = title;
+            document.getElementById('bookAuthor').value = author;
+            document.getElementById('bookPrice').value = price;
+            document.getElementById('bookCat').value = cat;
+            document.getElementById('saveBtn').innerText = 'Update Book';
+        }
 
-    loadBooks();
-</script>
+        function clearForm() {
+            document.getElementById('bookId').value = '';
+            document.getElementById('bookTitle').value = '';
+            document.getElementById('bookAuthor').value = '';
+            document.getElementById('bookPrice').value = '';
+            document.getElementById('bookCat').value = '';
+            document.getElementById('saveBtn').innerText = 'Add Book';
+        }
 
+        loadBooks();
+    </script>
 </body>
 </html>

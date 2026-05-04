@@ -1,19 +1,19 @@
 const products = [
-    { id: 1, name: "Mobile Phone", category: "Electronics", price: "$500", img: "product.png" },
-    { id: 2, name: "Laptop", category: "Electronics", price: "$1000", img: "product.png" },
-    { id: 3, name: "Headphones", category: "Electronics", price: "$100", img: "product.png" },
-    { id: 4, name: "Watch", category: "Fashion", price: "$200", img: "product.png" },
-    { id: 5, name: "Tablet", category: "Electronics", price: "$400", img: "product.png" },
-    { id: 6, name: "Notebook", category: "Stationery", price: "$5", img: "product.png" },
-    { id: 7, name: "Pen Set", category: "Stationery", price: "$10", img: "product.png" },
-    { id: 8, name: "Backpack", category: "Travel", price: "$50", img: "product.png" },
-    { id: 9, name: "Water Bottle", category: "Home", price: "$15", img: "product.png" },
-    { id: 10, name: "Coffee Mug", category: "Home", price: "$8", img: "product.png" },
-    { id: 11, name: "Desk Lamp", category: "Home", price: "$25", img: "product.png" },
-    { id: 12, name: "USB Cable", category: "Accessories", price: "$10", img: "product.png" },
-    { id: 13, name: "Mouse", category: "Accessories", price: "$20", img: "product.png" },
-    { id: 14, name: "Keyboard", category: "Accessories", price: "$30", img: "product.png" },
-    { id: 15, name: "Camera", category: "Electronics", price: "$600", img: "product.png" },
+    { id: 1, name: "Premium Smartphone", category: "Electronics", price: "$699", img: "https://via.placeholder.com/60" },
+    { id: 2, name: "Wireless Headphones", category: "Electronics", price: "$199", img: "https://via.placeholder.com/60" },
+    { id: 3, name: "Smart Watch", category: "Wearables", price: "$249", img: "https://via.placeholder.com/60" },
+    { id: 4, name: "Laptop Pro", category: "Electronics", price: "$1299", img: "https://via.placeholder.com/60" },
+    { id: 5, name: "Coffee Maker", category: "Home", price: "$89", img: "https://via.placeholder.com/60" },
+    { id: 6, name: "Running Shoes", category: "Sports", price: "$120", img: "https://via.placeholder.com/60" },
+    { id: 7, name: "Yoga Mat", category: "Sports", price: "$40", img: "https://via.placeholder.com/60" },
+    { id: 8, name: "Backpack", category: "Travel", price: "$75", img: "https://via.placeholder.com/60" },
+    { id: 9, name: "Desk Lamp", category: "Office", price: "$35", img: "https://via.placeholder.com/60" },
+    { id: 10, name: "Bluetooth Speaker", category: "Electronics", price: "$59", img: "https://via.placeholder.com/60" },
+    { id: 11, name: "Mechanical Keyboard", category: "Electronics", price: "$110", img: "https://via.placeholder.com/60" },
+    { id: 12, name: "Gaming Mouse", category: "Electronics", price: "$65", img: "https://via.placeholder.com/60" },
+    { id: 13, name: "Monitor 27-inch", category: "Electronics", price: "$299", img: "https://via.placeholder.com/60" },
+    { id: 14, name: "External SSD", category: "Electronics", price: "$150", img: "https://via.placeholder.com/60" },
+    { id: 15, name: "Power Bank", category: "Electronics", price: "$45", img: "https://via.placeholder.com/60" }
 ];
 
 const itemsPerPage = 10;
@@ -25,36 +25,41 @@ function displayProducts(page) {
     const paginatedItems = products.slice(start, end);
 
     const tbody = document.getElementById('productBody');
-    tbody.innerHTML = paginatedItems.map(p => `
-        <tr>
-            <td><strong>#${p.id}</strong></td>
-            <td><img src="${p.img}" alt="${p.name}" class="product-img"></td>
-            <td>${p.name}</td>
-            <td><span class="badge">${p.category}</span></td>
-            <td><strong>${p.price}</strong></td>
-        </tr>
-    `).join('');
+    tbody.innerHTML = '';
 
-    updatePagination();
+    paginatedItems.forEach(product => {
+        const row = `
+            <tr>
+                <td><img src="${product.img}" alt="${product.name}" class="product-img"></td>
+                <td>${product.name}</td>
+                <td>${product.category}</td>
+                <td>${product.price}</td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+
+    renderPagination();
 }
 
-function updatePagination() {
+function renderPagination() {
     const pageCount = Math.ceil(products.length / itemsPerPage);
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = '';
 
     for (let i = 1; i <= pageCount; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.classList.toggle('active', i === currentPage);
-        btn.onclick = () => {
+        const button = document.createElement('button');
+        button.innerText = i;
+        if (i === currentPage) button.classList.add('active');
+        
+        button.addEventListener('click', () => {
             currentPage = i;
-            displayProducts(i);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-        pagination.appendChild(btn);
+            displayProducts(currentPage);
+        });
+        
+        pagination.appendChild(button);
     }
 }
 
-// Initial Call
+// Initial call
 displayProducts(currentPage);

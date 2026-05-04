@@ -1,89 +1,77 @@
 <!-- 
 W3 Design a restaurant menu webpage using HTML and CSS, including menu categories, dishes, and pricing. 
-Add suitable images for the dishes. 
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W3 | Lumière Dining - Menu</title>
+    <title>Restaurant Menu | W3</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="overlay"></div>
-        <div class="header-content">
-            <h1>Our Restaurant</h1>
-            <p>Delicious Food for Everyone</p>
-        </div>
-    </header>
+    <div class="menu-container">
+        <header>
+            <h1>Delightful Bites</h1>
+            <p>Quality ingredients, delicious flavors</p>
+        </header>
 
-    <main class="container">
-        <section class="category">
-            <h2 class="cat-title">Starters</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="menu.png" alt="French Fries">
-                    <div class="item-info">
-                        <h3>French Fries <span class="price">$5</span></h3>
-                        <p>Crispy potato fries with salt and spices.</p>
-                    </div>
+        <section class="menu-section">
+            <h2 class="category-title">Starters</h2>
+            <div class="menu-items">
+                <div class="item">
+                    <span class="name">Crispy Spring Rolls</span>
+                    <span class="price">$7.50</span>
+                    <p class="desc">Deep-fried rolls stuffed with vegetables and glass noodles.</p>
                 </div>
-                <div class="menu-item">
-                    <img src="menu.png" alt="Garlic Bread">
-                    <div class="item-info">
-                        <h3>Garlic Bread <span class="price">$6</span></h3>
-                        <p>Baked bread with garlic butter and herbs.</p>
-                    </div>
+                <div class="item">
+                    <span class="name">Garlic Bread</span>
+                    <span class="price">$5.00</span>
+                    <p class="desc">Toasted baguette with garlic butter and herbs.</p>
                 </div>
             </div>
         </section>
 
-        <section class="category">
-            <h2 class="cat-title">Main Course</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="menu.png" alt="Veg Burger">
-                    <div class="item-info">
-                        <h3>Veg Burger <span class="price">$10</span></h3>
-                        <p>Burger with vegetable patty, lettuce, and cheese.</p>
-                    </div>
+        <section class="menu-section">
+            <h2 class="category-title">Main Course</h2>
+            <div class="menu-items">
+                <div class="item">
+                    <span class="name">Classic Cheeseburger</span>
+                    <span class="price">$12.99</span>
+                    <p class="desc">Beef patty, cheddar cheese, lettuce, and our secret sauce.</p>
                 </div>
-                <div class="menu-item">
-                    <img src="menu.png" alt="Cheese Pizza">
-                    <div class="item-info">
-                        <h3>Cheese Pizza <span class="price">$12</span></h3>
-                        <p>Fresh pizza with lots of mozzarella cheese.</p>
-                    </div>
+                <div class="item">
+                    <span class="name">Veggie Pasta</span>
+                    <span class="price">$14.00</span>
+                    <p class="desc">Penne pasta with roasted vegetables and marinara sauce.</p>
+                </div>
+                <div class="item">
+                    <span class="name">Grilled Salmon</span>
+                    <span class="price">$18.50</span>
+                    <p class="desc">Fresh salmon fillet served with asparagus and lemon butter.</p>
                 </div>
             </div>
         </section>
 
-        <section class="category">
-            <h2 class="cat-title">Cold Drinks</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="menu.png" alt="Ice Cream">
-                    <div class="item-info">
-                        <h3>Ice Cream <span class="price">$4</span></h3>
-                        <p>Cold vanilla ice cream with chocolate sauce.</p>
-                    </div>
+        <section class="menu-section">
+            <h2 class="category-title">Desserts & Drinks</h2>
+            <div class="menu-items">
+                <div class="item">
+                    <span class="name">Chocolate Lava Cake</span>
+                    <span class="price">$6.50</span>
+                    <p class="desc">Warm cake with a molten chocolate center.</p>
                 </div>
-                <div class="menu-item">
-                    <img src="menu.png" alt="Cold Coffee">
-                    <div class="item-info">
-                        <h3>Cold Coffee <span class="price">$5</span></h3>
-                        <p>Refreshing cold coffee with milk and sugar.</p>
-                    </div>
+                <div class="item">
+                    <span class="name">Iced Coffee</span>
+                    <span class="price">$4.00</span>
+                    <p class="desc">Cold brewed coffee served over ice.</p>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <p>Timing: 10:00 AM - 11:00 PM | Near City Mall, Main Road</p>
-        <p>&copy; 2026 My Restaurant</p>
-    </footer>
+        <footer>
+            <p>&copy; 2026 Delightful Bites Restaurant</p>
+        </footer>
+    </div>
 </body>
 </html>

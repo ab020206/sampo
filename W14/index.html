@@ -1,70 +1,58 @@
 <!-- 
-W14 Create a Node.js server that reads user data from a JSON file and serves it as an API, with frontend displaying data dynamically. 
+W14 Create a Node.js server that reads user data from a JSON file and serves it as an API. 
+A front-end page should display the list dynamically using HTML & JavaScript. 
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W14 | User API Frontend</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>W14 | User Directory</title>
     <style>
-        body { background: #f4f7f6; padding: 50px 0; }
-        .user-card { border: none; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #333; color: white; }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="text-center mb-5">
-        <h1 class="fw-bold">User Directory</h1>
-        <p class="text-muted">Fetched dynamically from Node.js API</p>
-        <button class="btn btn-primary px-4 rounded-pill" onclick="loadUsers()">Fetch Latest Data</button>
+    <div class="container">
+        <h2>User Directory (API Driven)</h2>
+        <button onclick="loadUsers()">Fetch User Data</button>
+        <table id="userTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody id="userBody"></tbody>
+        </table>
     </div>
 
-    <div id="userGrid" class="row g-4">
-        <!-- User cards will be loaded here -->
-        <div class="col-12 text-center text-muted py-5">
-            <p>Click "Fetch Latest Data" to load users from the server.</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    async function loadUsers() {
-        const grid = document.getElementById('userGrid');
-        grid.innerHTML = '<div class="text-center py-5">Loading data from server...</div>';
-
-        try {
-            // Call the Node.js API
-            const response = await fetch('http://localhost:3000/api/users');
-            if (!response.ok) throw new Error('Server not reachable');
-            
-            const users = await response.json();
-            
-            grid.innerHTML = users.map(user => `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card user-card p-3">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1">${user.name}</h5>
-                            <p class="text-primary small mb-2">${user.role}</p>
-                            <p class="text-muted small mb-0"><i class="fas fa-envelope me-2"></i>${user.email}</p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-        } catch (error) {
-            grid.innerHTML = `
-                <div class="col-12 text-center text-danger py-5">
-                    <h5>Error: Server is Offline</h5>
-                    <p>Please run <code>node server.js</code> in the W14 folder to start the API.</p>
-                </div>
-            `;
+    <script>
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const users = await response.json();
+                const body = document.getElementById('userBody');
+                body.innerHTML = '';
+                users.forEach(user => {
+                    body.innerHTML += `<tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.city}</td>
+                    </tr>`;
+                });
+                document.getElementById('userTable').style.display = 'table';
+            } catch (err) {
+                console.error('Error fetching users:', err);
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>

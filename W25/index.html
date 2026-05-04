@@ -1,77 +1,90 @@
 <!-- 
-W25 Create a mobile personal portfolio site using jQuery Mobile. 
+W25 Design a simple personal portfolio mobile site using jQuery Mobile. 
+Include: About Me, Projects, Skills, Contact Info. 
 -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>W25 | My Portfolio</title>
+    <title>W25 | Mobile Portfolio</title>
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <style>
-        .profile-img { width: 100px; border-radius: 50%; margin: 10px auto; display: block; }
-        .center { text-align: center; }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto 10px; }
+        .center-text { text-align: center; }
     </style>
 </head>
 <body>
 
-<div data-role="page" id="home">
+<div data-role="page" id="portfolio-home">
     <div data-role="header" data-theme="a">
         <h1>My Portfolio</h1>
     </div>
-    <div data-role="main" class="ui-content center">
-        <img src="https://via.placeholder.com/100" class="profile-img">
-        <h2>John Doe</h2>
-        <p>Web Developer & Designer</p>
-        
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#about" class="ui-btn-active ui-state-persist">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <div data-role="main" class="ui-content">
+        <div class="center-text">
+            <img src="https://via.placeholder.com/100?text=Me" class="profile-img">
+            <h3>John Developer</h3>
+            <p>Full Stack Web Developer</p>
         </div>
-
-        <div id="about_content" style="padding-top:20px;">
-            <p>I am a final year student at PICT. I love building mobile and web applications.</p>
-        </div>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#aboutme">About Me</a></li>
+            <li><a href="#projects">My Projects</a></li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li><a href="#contactme">Get in Touch</a></li>
+        </ul>
     </div>
 </div>
 
-<div data-role="page" id="about">
+<div data-role="page" id="aboutme">
     <div data-role="header">
-        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#portfolio-home" data-icon="home">Home</a>
         <h1>About Me</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <p>Passionate about technology and innovation. Currently focused on Full Stack Development.</p>
+        <p>I am a passionate developer with expertise in building responsive web applications and mobile sites. I love solving complex problems with simple solutions.</p>
+    </div>
+</div>
+
+<div data-role="page" id="projects">
+    <div data-role="header">
+        <a href="#portfolio-home" data-icon="home">Home</a>
+        <h1>Projects</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true">
+            <li><h3>E-commerce App</h3><p>Built with Node.js and MongoDB.</p></li>
+            <li><h3>Portfolio Site</h3><p>Modern design with animations.</p></li>
+            <li><h3>Weather App</h3><p>Real-time data via OpenWeather API.</p></li>
+        </ul>
     </div>
 </div>
 
 <div data-role="page" id="skills">
     <div data-role="header">
-        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#portfolio-home" data-icon="home">Home</a>
         <h1>Skills</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <ul data-role="listview">
-            <li>HTML / CSS</li>
-            <li>JavaScript</li>
-            <li>Node.js</li>
+        <ul data-role="listview" data-inset="true">
+            <li>HTML5 / CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>Node.js / Express</li>
             <li>MongoDB</li>
+            <li>jQuery Mobile</li>
         </ul>
     </div>
 </div>
 
-<div data-role="page" id="contact">
+<div data-role="page" id="contactme">
     <div data-role="header">
-        <a href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <a href="#portfolio-home" data-icon="home">Home</a>
         <h1>Contact</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <p>Email: john.doe@example.com</p>
-        <p>LinkedIn: linkedin.com/in/johndoe</p>
+        <p>Email: john.dev@example.com</p>
+        <p>LinkedIn: /in/johndev</p>
+        <a href="mailto:john.dev@example.com" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Send Email</a>
     </div>
 </div>
 

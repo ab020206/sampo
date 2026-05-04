@@ -2,30 +2,29 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-// Node.js Product API
 const server = http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'application/json');
-
-    if (req.url === '/api/products' && req.method === 'GET') {
-        const filePath = path.join(__dirname, 'products.json');
-        
-        fs.readFile(filePath, 'utf8', (err, data) => {
+    if (req.url === '/') {
+        fs.readFile(path.join(__dirname, 'index.html'), (err, content) => {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
+    } else if (req.url === '/api/products') {
+        fs.readFile(path.join(__dirname, 'products.json'), (err, content) => {
             if (err) {
                 res.writeHead(500);
-                res.end(JSON.stringify({ error: "Failed to load products" }));
-                return;
+                res.end('Error loading JSON');
+            } else {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(content);
             }
-            res.writeHead(200);
-            res.end(data);
         });
     } else {
         res.writeHead(404);
-        res.end(JSON.stringify({ error: "Not found. Try /api/products" }));
+        res.end('Not Found');
     }
 });
 
-const PORT = 4000;
+const PORT = 3001;
 server.listen(PORT, () => {
-    console.log(`Product API running at http://localhost:${PORT}/api/products`);
+    console.log(`W15 Product API running at http://localhost:${PORT}`);
 });

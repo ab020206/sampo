@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W11 - Auth System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f2f5; min-height: 100vh; display: flex; align-items: center; }
+        .auth-card { width: 100%; max-width: 500px; margin: auto; border: none; border-radius: 1rem; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); }
+        .nav-pills .nav-link.active { background-color: #0d6efd; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card auth-card p-4">
+        <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="tab-login" data-bs-toggle="pill" data-bs-target="#pills-login">Login</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="tab-register" data-bs-toggle="pill" data-bs-target="#pills-register">Register</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Login Form -->
+            <div class="tab-pane fade show active" id="pills-login">
+                <h3 class="text-center mb-4">Login</h3>
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="tab-pane fade" id="pills-register">
+                <h3 class="text-center mb-4">Register</h3>
+                <form id="registerForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="regName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="regEmail" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="regMobile" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="regDob" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" id="regCity" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Address</label>
+                            <textarea class="form-control" id="regAddress" rows="2" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="regPassword" minlength="6" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mt-4">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const API_URL = '/api/auth';
+
+    // Handle Registration
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            name: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            mobile: document.getElementById('regMobile').value,
+            dob: document.getElementById('regDob').value,
+            city: document.getElementById('regCity').value,
+            address: document.getElementById('regAddress').value,
+            password: document.getElementById('regPassword').value
+        };
+
+        try {
+            const res = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (res.ok) {
+                alert('Registration successful! Please login.');
+                document.getElementById('tab-login').click();
+            } else {
+                alert(result.error);
+            }
+        } catch (err) {
+            alert('Server error during registration');
+        }
+    });
+
+    // Handle Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const res = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const result = await res.json();
+            if (res.ok) {
+                // Store user data in sessionStorage to display on next page
+                sessionStorage.setItem('loggedInUser', JSON.stringify(result.user));
+                window.location.href = 'dashboard.html';
+            } else {
+                alert(result.error);
+            }
+        } catch (err) {
+            alert('Server error during login');
+        }
+    });
+</script>
+
+</body>
+</html>
