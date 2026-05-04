@@ -1,55 +1,17 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const app = express();
+const PORT = 3003;
 
-const server = http.createServer((req, res) => {
-    let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
-    
-    // Custom API Route
-    if (req.url === '/api/employees') {
-        filePath = path.join(__dirname, 'employees.json');
-    }
-
-    const extname = String(path.extname(filePath)).toLowerCase();
-    const mimeTypes = {
-        '.html': 'text/html',
-        '.js': 'text/javascript',
-        '.css': 'text/css',
-        '.json': 'application/json',
-        '.png': 'image/png',
-        '.jpg': 'image/jpg',
-        '.gif': 'image/gif',
-        '.svg': 'image/svg+xml',
-        '.wav': 'audio/wav',
-        '.mp4': 'video/mp4',
-        '.woff': 'application/font-woff',
-        '.woff2': 'application/font-woff2',
-        '.ttf': 'application/font-ttf',
-        '.eot': 'application/vnd.ms-fontobject',
-        '.otf': 'application/font-otf',
-        '.wasm': 'application/wasm'
-    };
-
-    const contentType = mimeTypes[extname] || 'application/octet-stream';
-
-    fs.readFile(filePath, (error, content) => {
-        if (error) {
-            if(error.code == 'ENOENT') {
-                res.writeHead(404);
-                res.end('404 Not Found');
-            } else {
-                res.writeHead(500);
-                res.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
-            }
-        } else {
-            res.writeHead(200, { 'Content-Type': contentType });
-            res.end(content, 'utf-8');
-        }
-    });
+// API Route
+app.get('/api/employees', (req, res) => {
+    res.sendFile(path.join(__dirname, 'employees.json'));
 });
 
-const PORT = 3003;
-server.listen(PORT, () => {
-    console.log(`W17 Employee API running at http://localhost:${PORT}`);
+// Serve Static Files
+app.use(express.static(__dirname));
+
+app.listen(PORT, () => {
+    console.log(`W17 Employee Directory Server running at http://localhost:${PORT}`);
 });
 
