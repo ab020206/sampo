@@ -14,4 +14,3 @@ app.use(express.static(__dirname));
 app.listen(PORT, () => {
     console.log(`W15 Product API running at http://localhost:${PORT}`);
 });
-

@@ -5,24 +5,62 @@ Display count/list, filter by director/singer, delete/add songs, update actor/ac
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>W18 | Music Database</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background: #333; color: white; }
-        .controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
-        button { padding: 8px 12px; cursor: pointer; }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Music Database Management</h2>
-        
+
         <div class="controls">
             <button onclick="seedData()">Initialize (Seed 5 Songs)</button>
             <button onclick="loadAll()">List All Songs</button>
@@ -110,4 +148,5 @@ Display count/list, filter by director/singer, delete/add songs, update actor/ac
         }
     </script>
 </body>
+
 </html>
