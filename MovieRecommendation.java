@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javax.naming.Context;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 
@@ -123,12 +125,17 @@ public class MovieRecommendation {
                 job.setReducerClass(
                                 MovieReducer.class);
 
+                job.setMapOutputKeyClass(
+                                Text.class);
+
+                job.setMapOutputValueClass(
+                                FloatWritable.class);
+
                 job.setOutputKeyClass(
                                 Text.class);
 
                 job.setOutputValueClass(
-                                FloatWritable.class);
-
+                                Text.class);
                 FileInputFormat.addInputPath(
                                 job,
                                 new Path(args[0]));

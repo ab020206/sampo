@@ -1,5 +1,7 @@
 import java.io.*;
 
+import javax.naming.Context;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 
@@ -62,6 +64,9 @@ public class WordCount {
 
         job.setMapperClass(MyMapper.class);
         job.setReducerClass(MyReducer.class);
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(IntWritable.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);

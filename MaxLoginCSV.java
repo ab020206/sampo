@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.naming.Context;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 
@@ -130,6 +132,9 @@ public class MaxLoginCSV {
         job.setMapperClass(LoginMapper.class);
 
         job.setReducerClass(LoginReducer.class);
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
 
         job.setOutputKeyClass(Text.class);
 

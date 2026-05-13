@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javax.naming.Context;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 
@@ -130,6 +132,12 @@ public class RadioSkipAnalysis {
 
                 job.setReducerClass(
                                 RadioReducer.class);
+
+                job.setMapOutputKeyClass(
+                                Text.class);
+
+                job.setMapOutputValueClass(
+                                Text.class);
 
                 job.setOutputKeyClass(
                                 Text.class);
