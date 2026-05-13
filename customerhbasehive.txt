@@ -1,0 +1,117 @@
+
+
+PS 7 — Customer Information System using HBase + HiveQL
+
+-- =========================================================
+-- FILE NAME: CustomerInfoSystem.hql
+-- =========================================================
+
+-- COMMANDS TO RUN:
+--
+-- start-dfs.sh
+-- start-yarn.sh
+-- start-hbase.sh
+-- hive
+-- hive -f CustomerInfoSystem.hql
+
+CREATE TABLE customer_info(
+cust_id INT,
+cust_name STRING,
+order_id INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+CREATE TABLE order_info(
+order_id INT,
+item_id INT,
+quantity INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+CREATE TABLE item_info(
+item_id INT,
+item_name STRING,
+item_price INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INPATH '/home/hadoop/customer.csv'
+INTO TABLE customer_info;
+
+LOAD DATA LOCAL INPATH '/home/hadoop/order.csv'
+INTO TABLE order_info;
+
+LOAD DATA LOCAL INPATH '/home/hadoop/item.csv'
+INTO TABLE item_info;
+
+SELECT * FROM customer_info;
+SELECT * FROM order_info;
+SELECT * FROM item_info;
+
+SELECT
+c.cust_name,
+i.item_name,
+o.quantity
+FROM customer_info c
+JOIN order_info o
+ON c.order_id = o.order_id
+JOIN item_info i
+ON o.item_id = i.item_id;
+
+SELECT
+SUM(i.item_price * o.quantity) AS Total_Sales
+FROM order_info o
+JOIN item_info i
+ON o.item_id = i.item_id;
+
+SELECT
+AVG(i.item_price * o.quantity) AS Average_Sales
+FROM order_info o
+JOIN item_info i
+ON o.item_id = i.item_id;
+
+SELECT
+c.cust_name,
+SUM(i.item_price * o.quantity) AS Total
+FROM customer_info c
+JOIN order_info o
+ON c.order_id = o.order_id
+JOIN item_info i
+ON o.item_id = i.item_id
+GROUP BY c.cust_name
+ORDER BY Total DESC
+LIMIT 1;
+
+CREATE INDEX customer_index
+ON TABLE customer_info(cust_name)
+AS 'COMPACT';
+
+create 'customer_hbase', 'details'
+
+put 'customer_hbase', '1', 'details:name', 'Amit'
+put 'customer_hbase', '1', 'details:order', '101'
+
+put 'customer_hbase', '2', 'details:name', 'Rahul'
+put 'customer_hbase', '2', 'details:order', '102'
+
+scan 'customer_hbase'
+
+CREATE EXTERNAL TABLE customer_external(
+id STRING,
+name STRING,
+orderid STRING
+)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES (
+"hbase.columns.mapping" =
+":key,details:name,details:order"
+)
+TBLPROPERTIES ("hbase.table.name" = "customer_hbase");
+
+SELECT * FROM customer_external;
+
+
+============================================================

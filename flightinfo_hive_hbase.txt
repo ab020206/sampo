@@ -1,0 +1,61 @@
+
+PS 6 — Flight Information System using HBase + HiveQL
+
+
+-- COMMANDS TO RUN:
+--
+-- start-dfs.sh
+-- start-yarn.sh
+-- start-hbase.sh
+-- hbase shell
+-- hive
+-- hive -f FlightInfoSystem.hql
+
+create 'flight_info', 'details'
+
+put 'flight_info', '1', 'details:name', 'Indigo'
+put 'flight_info', '1', 'details:schedule', '10AM'
+put 'flight_info', '1', 'details:delay', '20'
+
+put 'flight_info', '2', 'details:name', 'AirIndia'
+put 'flight_info', '2', 'details:schedule', '2PM'
+put 'flight_info', '2', 'details:delay', '15'
+
+put 'flight_info', '3', 'details:name', 'SpiceJet'
+put 'flight_info', '3', 'details:schedule', '6PM'
+put 'flight_info', '3', 'details:delay', '30'
+
+scan 'flight_info'
+
+disable 'flight_info'
+
+alter 'flight_info', NAME => 'extra'
+
+enable 'flight_info'
+
+CREATE EXTERNAL TABLE flight_hive(
+id STRING,
+name STRING,
+schedule STRING,
+delay STRING
+)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES (
+"hbase.columns.mapping" =
+":key,details:name,details:schedule,details:delay"
+)
+TBLPROPERTIES ("hbase.table.name" = "flight_info");
+
+SELECT * FROM flight_hive;
+
+SELECT SUM(CAST(delay AS INT)) AS Total_Delay
+FROM flight_hive;
+
+SELECT AVG(CAST(delay AS INT)) AS Average_Delay
+FROM flight_hive;
+
+CREATE INDEX flight_index
+ON TABLE flight_hive(name)
+AS 'COMPACT';
+
+DROP INDEX flight_index ON flight_hive;

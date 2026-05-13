@@ -1,0 +1,110 @@
+# Start Hadoop
+start-dfs.sh
+start-yarn.sh
+jps
+
+# Open Hive
+hive
+
+CREATE DATABASE retaildb;
+USE retaildb;
+
+# Create Table
+CREATE TABLE online_retail(
+InvoiceNo STRING,
+StockCode STRING,
+Description STRING,
+Quantity INT,
+InvoiceDate STRING,
+UnitPrice FLOAT,
+CustomerID STRING,
+Country STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+# Load Data
+LOAD DATA LOCAL INPATH '/home/hadoop/OnlineRetail.csv'
+INTO TABLE online_retail;
+
+SELECT * FROM online_retail LIMIT 10;
+
+# Create Index
+CREATE INDEX retail_index
+ON TABLE online_retail(CustomerID)
+AS 'COMPACT'
+WITH DEFERRED REBUILD;
+
+ALTER INDEX retail_index ON online_retail REBUILD;
+
+# Total Sales
+SELECT SUM(Quantity * UnitPrice) AS Total_Sales
+FROM online_retail;
+
+# Average Sales
+SELECT AVG(Quantity * UnitPrice) AS Average_Sales
+FROM online_retail;
+
+# Max Order Cost
+SELECT InvoiceNo,
+SUM(Quantity * UnitPrice) AS Order_Total
+FROM online_retail
+GROUP BY InvoiceNo
+ORDER BY Order_Total DESC
+LIMIT 1;
+
+# Max Customer Total
+SELECT CustomerID,
+SUM(Quantity * UnitPrice) AS Customer_Total
+FROM online_retail
+GROUP BY CustomerID
+ORDER BY Customer_Total DESC
+LIMIT 1;
+
+# Max Sale Country
+SELECT Country,
+SUM(Quantity * UnitPrice) AS Total_Sale
+FROM online_retail
+GROUP BY Country
+ORDER BY Total_Sale DESC
+LIMIT 1;
+
+# Min Sale Country
+SELECT Country,
+SUM(Quantity * UnitPrice) AS Total_Sale
+FROM online_retail
+GROUP BY Country
+ORDER BY Total_Sale ASC
+LIMIT 1;
+
+# Open HBase
+hbase shell
+
+create 'hbase_retail','details'
+
+put 'hbase_retail','1','details:InvoiceNo','536365'
+put 'hbase_retail','1','details:CustomerID','17850'
+put 'hbase_retail','1','details:Country','United Kingdom'
+put 'hbase_retail','1','details:Sales','139.12'
+
+scan 'hbase_retail'
+
+exit
+
+# Connect Hive with HBase
+CREATE EXTERNAL TABLE hbase_retail(
+key STRING,
+InvoiceNo STRING,
+CustomerID STRING,
+Country STRING,
+Sales STRING
+)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES (
+"hbase.columns.mapping" =
+":key,details:InvoiceNo,details:CustomerID,details:Country,details:Sales"
+)
+TBLPROPERTIES("hbase.table.name" = "hbase_retail");
+
+SELECT * FROM hbase_retail;

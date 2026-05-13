@@ -1,6 +1,0 @@
-[
-    { "name": "Vikram Singh", "designation": "Software Engineer", "department": "IT", "salary": "75000" },
-    { "name": "Anjali Gupta", "designation": "HR Manager", "department": "HR", "salary": "65000" },
-    { "name": "Rohan Mehta", "designation": "Sales Lead", "department": "Sales", "salary": "70000" },
-    { "name": "Shreya Iyer", "designation": "UX Designer", "department": "Design", "salary": "68000" }
-]
